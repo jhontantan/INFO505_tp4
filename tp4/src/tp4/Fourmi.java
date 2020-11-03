@@ -15,12 +15,23 @@ public class Fourmi {
 	}
 
 
-	public void ajouterVille(Ville v) {
-		chemin.add(v);
+	public boolean ajouterVille(Ville v) {
+		if(chemin.contains(v)) {
+			chemin.add(v);
+			return true;
+		}
+		return false;
 	}
-
+	
+	/*
 	 public int cheminEffectue(int n) {
 		return n = chemin.size();
+	}
+	*/
+
+
+	public boolean cheminFini() {
+		return chemin.size() == Main.NOMBRE_VILLE;
 	}
 
 }

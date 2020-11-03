@@ -20,6 +20,16 @@ public class Ville {
   	public int getID(){
   		return id;	
   	}
+  	
+  	public boolean equals(Object obj) {
+  		if(obj != null) {
+  	  		if(obj instanceof Ville) {
+  	  			Ville ville = (Ville) obj;
+  	  			return this.id == ville.id; 
+  	  		}
+  		}
+  		return false;  		
+  	}
 
 
   }
