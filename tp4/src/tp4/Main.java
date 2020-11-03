@@ -3,6 +3,11 @@ package tp4;
 import java.util.ArrayList;
 
 public class Main {
+	
+	public final static int Q = 1;
+	public final static double C = 0.7;
+	public final static int A = 1;
+	public final static int B = 1;
 
 	public final static int NOMBRE_VILLE = 5;
 	public final static int NOMBRE_FOURMI = 10;

@@ -5,7 +5,6 @@ import java.util.ArrayList;
 public class Fourmi {
 	public static int ID = 0;
 	private int id;
-	//private int positionVille;
 	private ArrayList<Ville> chemin;
 
 
@@ -32,6 +31,11 @@ public class Fourmi {
 
 	public boolean cheminFini() {
 		return chemin.size() == Main.NOMBRE_VILLE;
+	}
+
+
+	public void villeSuivante(Carte carte) {
+		chemin.add(carte.getRandomVilleNotIn(chemin));
 	}
 
 }

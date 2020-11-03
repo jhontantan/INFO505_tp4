@@ -1,7 +1,7 @@
 package tp4;
 
 import java.util.ArrayList;
-
+import java.util.Random;
 import java.util.ArrayList;
 
 public class Carte {
@@ -36,6 +36,15 @@ public class Carte {
 	public ArrayList<Ville> getVilles(){
 		return villes;
 	}
+	
+	public Ville getRandomVilleNotIn(ArrayList<Ville> villesAlreadyUsed){
+		Random random = new Random();
+		Ville villeCC = villes.get(random.nextInt(villes.size()));
+		while (villesAlreadyUsed.contains(villeCC)) {
+			villeCC = villes.get(random.nextInt(villes.size()));
+		}
+		return villeCC;
+	}
 
 	public ArrayList<int[]> getArretes(){
 		return arretes;
@@ -52,14 +61,18 @@ public class Carte {
 	public Ville getVilleAleatoire() {
 		return villes.get((int) Math.random()*nombreVille);
 	}
-	/*
+
 
 	public void evaporation() {
 		for (int i = 0; i < arretes.size(); i++) {
-
+			 arretes.get(i)[2] = (int) (arretes.get(i)[2] * (1 - Main.C));
 		}
+		
 	}
-	*/
+
+	public void deposerPheromone() {
+		
+	}
 
 
 }
