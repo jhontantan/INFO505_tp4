@@ -26,12 +26,6 @@ public class Fourmi {
 		return chemin;
 	}
 	
-	/*
-	 public int cheminEffectue(int n) {
-		return n = chemin.size();
-	}
-	*/
-	
 
 	public boolean cheminFini() {
 		return chemin.size() == Main.NOMBRE_VILLE;
