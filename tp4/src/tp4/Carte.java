@@ -49,7 +49,7 @@ public class Carte {
 	public ArrayList<Arrete> getArretes(){
 		return arretes;
 	}
-*/
+
 	public void repartirFourmis(Colonie colonie) {
 		for (int i = 0; i < colonie.getNombreFourmi(); i++) {
 			Fourmi fourmiCourante = colonie.getFourmi(i);
@@ -68,7 +68,6 @@ public class Carte {
 		return villes.get((int) Math.random()*nombreVille);
 	}
 
-	/*
 	public void evaporation() {
 		for (int i = 0; i < arretes.size(); i++) {
 			arretes.get(i).evaporation();
@@ -76,7 +75,8 @@ public class Carte {
 		}
 
 	}
-	*/
+
+
 	public void deposerPheromone(Colonie col) {
 		for (int i = 0; i < col.getNombreFourmi(); i++) {
 			Fourmi fourmiC = col.getFourmi(i);

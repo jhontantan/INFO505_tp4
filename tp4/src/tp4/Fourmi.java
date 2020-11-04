@@ -36,6 +36,7 @@ public class Fourmi {
 
 	public void villeSuivante(Carte carte) {
 		chemin.add(carte.getRandomVilleNotIn(chemin));
+		//toDO
 	}
 
 }
