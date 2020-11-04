@@ -71,7 +71,6 @@ public class Carte {
 	public void evaporation() {
 		for (int i = 0; i < arretes.size(); i++) {
 			arretes.get(i).evaporation();
-			//arretes.get(i)[3] = (arretes.get(i)[3] * (1 - Main.C));
 		}
 
 	}
