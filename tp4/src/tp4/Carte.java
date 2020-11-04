@@ -24,10 +24,17 @@ public class Carte {
 		initialiserArretes();
 	}
 
+	
 	private void initialiserArretes() {
 		Ville villeCourante;
 		for(int i = 0; i < nombreVille; i++) {
 			villeCourante = villes.get(i);
+			for(int j=i; j<nombreVille; j++) {
+				if  (!(arretes.contains(villeCourante))) {
+					arretes.add(new Arrete(villeCourante,villes.get(j)));
+				}
+					
+			}
 			//TODO
 		}
 	}
