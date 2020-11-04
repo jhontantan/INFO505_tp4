@@ -15,6 +15,24 @@ public class Arrete {
 		
 		
 	}
+
+	public Ville getVille2() {
+		return ville2;
+	}
+
+	public Ville getVille1() {
+		return ville1;
+	}
+
+	public double getDistance() {
+		return distance;
+	}
+
+	public double getQtePhe() {
+		return qtePhe;
+	}
+	
+	
 	
 
 }
