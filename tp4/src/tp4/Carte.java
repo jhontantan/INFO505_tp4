@@ -12,7 +12,6 @@ public class Carte {
 	private int nombreVille;
 	private ArrayList<Ville> villes;
 	private ArrayList<Arrete> arretes;
-	//[ville1, ville2, distance, qtePhe]
 
 	public Carte(int nombreVille) {
 		villes = new ArrayList<Ville>();
@@ -46,11 +45,11 @@ public class Carte {
 		return villeCC;
 	}
 
-	/*
-	public ArrayList<double[]> getArretes(){
+	
+	public ArrayList<Arrete> getArretes(){
 		return arretes;
 	}
-*/
+
 	public void repartirFourmis(Colonie colonie) {
 		for (int i = 0; i < colonie.getNombreFourmi(); i++) {
 			Fourmi fourmiCourante = colonie.getFourmi(i);
