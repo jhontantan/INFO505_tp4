@@ -54,11 +54,21 @@ public class Arrete {
 		qtePhe = qtePhe * (1 - Main.C);
 	}
 	
+	public void deposerPhe(double qte) {
+		qtePhe += qte;
+	}
+	
   	public boolean equals(Object obj) {
   		if(obj != null) {
   	  		if(obj instanceof Arrete) {
   	  		Arrete arrete = (Arrete) obj;
-  	  			//TODO
+  	  			if(arrete.ville2 == null && arrete.ville1 != null) {
+  	  				return arrete.ville1.equals(ville1) || arrete.ville1.equals(ville2);
+  	  			} else if(arrete.ville2 != null && arrete.ville1 == null) {
+  	  				return arrete.ville2.equals(ville2) || arrete.ville2.equals(ville1);
+  	  			} else {
+  	  				return (arrete.ville1.equals(ville1) || arrete.ville1.equals(ville2)) && (arrete.ville2.equals(ville1) || arrete.ville2.equals(ville2));
+  	  			}
   	  		}
   		}
   		return false;  		

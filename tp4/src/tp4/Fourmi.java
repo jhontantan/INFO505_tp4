@@ -15,12 +15,9 @@ public class Fourmi {
 	}
 
 
-	public boolean ajouterVille(Ville v, ArrayList<Arrete> arretes) {
-		if(!chemin.contains(v)) {
-			chemin.add(arretes.get(arretes.indexOf(new Arrete(villeCourante, v))));
-			villeCourante = v;
-			return true;
-		}
+	public boolean auDepart(Ville v) {
+		villeCourante = v;
+		chemin = new ArrayList<Arrete>();
 		return false;
 	}
 	
@@ -35,8 +32,11 @@ public class Fourmi {
 
 
 	public void villeSuivante(Carte carte) {
-		chemin.add(carte.getRandomVilleNotIn(chemin));
-		//toDO
+		//TODO attention, gerer la fin du cycle
+		Ville villeRandom = carte.getRandomVilleNotIn(chemin);
+		ArrayList<Arrete> arretes = carte.getArretes();
+		chemin.add(arretes.get(arretes.indexOf(new Arrete(villeCourante, villeRandom))));
+		villeCourante = villeRandom;
 	}
 
 }

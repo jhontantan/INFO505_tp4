@@ -46,9 +46,10 @@ public class Carte {
 	public Ville getRandomVilleNotIn(ArrayList<Arrete> villesAlreadyUsed){
 		Random random = new Random();
 		Ville villeCC = villes.get(random.nextInt(villes.size()));
-		while (villesAlreadyUsed.contains(new Arrete(villeCC))) {
-			//Equals de Arrete : teste si une des deux ville est null, si oui elle compare seulement une ville !
-			villeCC = villes.get(random.nextInt(villes.size()));
+		if(villesAlreadyUsed != null) {
+			while (villesAlreadyUsed.contains(new Arrete(villeCC))) {
+				villeCC = villes.get(random.nextInt(villes.size()));
+			}
 		}
 		return villeCC;
 	}
@@ -60,7 +61,7 @@ public class Carte {
 	public void repartirFourmis(Colonie colonie) {
 		for (int i = 0; i < colonie.getNombreFourmi(); i++) {
 			Fourmi fourmiCourante = colonie.getFourmi(i);
-			fourmiCourante.ajouterVille(getVilleAleatoire(), arretes);
+			fourmiCourante.auDepart(getVilleAleatoire());
 		}
 
 	}
@@ -79,23 +80,27 @@ public class Carte {
 		for (int i = 0; i < arretes.size(); i++) {
 			arretes.get(i).evaporation();
 		}
-
 	}
 
 
 	public void deposerPheromone(Colonie col) {
 		for (int i = 0; i < col.getNombreFourmi(); i++) {
 			Fourmi fourmiC = col.getFourmi(i);
-			ArrayList<Ville> chemin = fourmiC.getChemin();
+			ArrayList<Arrete> chemin = fourmiC.getChemin();
 			double distanceC = calculerDistanceChemin(chemin);
-			//TODO
+			for (int j = 0; j < chemin.size(); j++) {
+				//Besoin d'aller rechercher dans l'att arretes de Carte ? (pointeurs?)
+				chemin.get(i).deposerPhe(Main.Q/distanceC);
+			}
 		}
 	}
 
-	private double calculerDistanceChemin(ArrayList<Ville> chemin) {
-		//TODO
-
-		return 0;
+	private double calculerDistanceChemin(ArrayList<Arrete> chemin) {
+		double distance = 0;
+		for (int i = 0; i < chemin.size(); i++) {
+			distance += chemin.get(i).getDistance();
+		}
+		return distance;
 	}
 
 
