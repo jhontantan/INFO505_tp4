@@ -11,12 +11,12 @@ public class Carte {
 
 	private int nombreVille;
 	private ArrayList<Ville> villes;
-	private ArrayList<int[]> arretes;
-	//[ville1, ville2, qtePhe]
+	private ArrayList<double[]> arretes;
+	//[ville1, ville2, distance, qtePhe]
 
 	public Carte(int nombreVille) {
 		villes = new ArrayList<Ville>();
-		arretes = new ArrayList<int[]>();
+		arretes = new ArrayList<double[]>();
 		this.nombreVille = nombreVille;
 
 		for (int i = 0; i < nombreVille; i++) {
@@ -46,7 +46,7 @@ public class Carte {
 		return villeCC;
 	}
 
-	public ArrayList<int[]> getArretes(){
+	public ArrayList<double[]> getArretes(){
 		return arretes;
 	}
 
@@ -57,6 +57,12 @@ public class Carte {
 		}
 
 	}
+	
+	public double getDistance(Ville depart, Ville arrive){
+		int x = depart.getX() - arrive.getX();
+		int y = depart.getY() - arrive.getY();
+		return Math.sqrt(Math.pow(x,2) + Math.pow(y,2));	
+	}
 
 	public Ville getVilleAleatoire() {
 		return villes.get((int) Math.random()*nombreVille);
@@ -65,7 +71,7 @@ public class Carte {
 
 	public void evaporation() {
 		for (int i = 0; i < arretes.size(); i++) {
-			 arretes.get(i)[2] = (int) (arretes.get(i)[2] * (1 - Main.C));
+			 arretes.get(i)[3] = (arretes.get(i)[3] * (1 - Main.C));
 		}
 		
 	}
