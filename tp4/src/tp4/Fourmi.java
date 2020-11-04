@@ -5,24 +5,26 @@ import java.util.ArrayList;
 public class Fourmi {
 	public static int ID = 0;
 	private int id;
-	private ArrayList<Ville> chemin;
+	private ArrayList<Arrete> chemin;
+	private Ville villeCourante;
 
 
 	public Fourmi() {
-		chemin =  new ArrayList<Ville>();
+		chemin = new ArrayList<Arrete>();
 		this.id = ID++;
 	}
 
 
-	public boolean ajouterVille(Ville v) {
-		if(chemin.contains(v)) {
-			chemin.add(v);
+	public boolean ajouterVille(Ville v, ArrayList<Arrete> arretes) {
+		if(!chemin.contains(v)) {
+			chemin.add(arretes.get(arretes.indexOf(new Arrete(villeCourante, v))));
+			villeCourante = v;
 			return true;
 		}
 		return false;
 	}
 	
-	public ArrayList<Ville> getChemin(){
+	public ArrayList<Arrete> getChemin(){
 		return chemin;
 	}
 	

@@ -11,12 +11,11 @@ public class Carte {
 
 	private int nombreVille;
 	private ArrayList<Ville> villes;
-	private ArrayList<double[]> arretes;
-	//[ville1, ville2, distance, qtePhe]
+	private ArrayList<Arrete> arretes;
 
 	public Carte(int nombreVille) {
 		villes = new ArrayList<Ville>();
-		arretes = new ArrayList<double[]>();
+		arretes = new ArrayList<Arrete>();
 		this.nombreVille = nombreVille;
 
 		for (int i = 0; i < nombreVille; i++) {
@@ -37,23 +36,24 @@ public class Carte {
 		return villes;
 	}
 	
-	public Ville getRandomVilleNotIn(ArrayList<Ville> villesAlreadyUsed){
+	public Ville getRandomVilleNotIn(ArrayList<Arrete> villesAlreadyUsed){
 		Random random = new Random();
 		Ville villeCC = villes.get(random.nextInt(villes.size()));
-		while (villesAlreadyUsed.contains(villeCC)) {
+		while (villesAlreadyUsed.contains(new Arrete(villeCC))) {
+			//Equals de Arrete : teste si une des deux ville est null, si oui elle compare seulement une ville !
 			villeCC = villes.get(random.nextInt(villes.size()));
 		}
 		return villeCC;
 	}
 
-	public ArrayList<double[]> getArretes(){
+	public ArrayList<Arrete> getArretes(){
 		return arretes;
 	}
 
 	public void repartirFourmis(Colonie colonie) {
 		for (int i = 0; i < colonie.getNombreFourmi(); i++) {
 			Fourmi fourmiCourante = colonie.getFourmi(i);
-			fourmiCourante.ajouterVille(getVilleAleatoire());
+			fourmiCourante.ajouterVille(getVilleAleatoire(), arretes);
 		}
 
 	}
@@ -71,7 +71,8 @@ public class Carte {
 
 	public void evaporation() {
 		for (int i = 0; i < arretes.size(); i++) {
-			 arretes.get(i)[3] = (arretes.get(i)[3] * (1 - Main.C));
+			arretes.get(i).evaporation();
+			//arretes.get(i)[3] = (arretes.get(i)[3] * (1 - Main.C));
 		}
 		
 	}
