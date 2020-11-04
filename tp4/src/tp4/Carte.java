@@ -11,12 +11,12 @@ public class Carte {
 
 	private int nombreVille;
 	private ArrayList<Ville> villes;
-	private ArrayList<double[]> arretes;
+	private ArrayList<Arrete> arretes;
 	//[ville1, ville2, distance, qtePhe]
 
 	public Carte(int nombreVille) {
 		villes = new ArrayList<Ville>();
-		arretes = new ArrayList<double[]>();
+		arretes = new ArrayList<Arrete>();
 		this.nombreVille = nombreVille;
 
 		for (int i = 0; i < nombreVille; i++) {
@@ -46,10 +46,11 @@ public class Carte {
 		return villeCC;
 	}
 
+	/*
 	public ArrayList<double[]> getArretes(){
 		return arretes;
 	}
-
+*/
 	public void repartirFourmis(Colonie colonie) {
 		for (int i = 0; i < colonie.getNombreFourmi(); i++) {
 			Fourmi fourmiCourante = colonie.getFourmi(i);
@@ -68,14 +69,14 @@ public class Carte {
 		return villes.get((int) Math.random()*nombreVille);
 	}
 
-
+	/*
 	public void evaporation() {
 		for (int i = 0; i < arretes.size(); i++) {
 			 arretes.get(i)[3] = (arretes.get(i)[3] * (1 - Main.C));
 		}
 		
 	}
-
+	*/
 	public void deposerPheromone(Colonie col) {
 		for (int i = 0; i < col.getNombreFourmi(); i++) {
 			Fourmi fourmiC = col.getFourmi(i);
