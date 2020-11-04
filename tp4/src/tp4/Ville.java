@@ -14,7 +14,7 @@ public class Ville {
   	}
 
   	public Ville() {
-  		this((int) Math.random() * Carte.LARGEUR, (int) Math.random() * Carte.HAUTEUR);
+  		this((int) (Math.random() * Carte.LARGEUR), (int) (Math.random() * Carte.HAUTEUR));
   	}
   	
   	public int getX() {

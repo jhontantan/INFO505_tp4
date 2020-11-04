@@ -16,15 +16,21 @@ public class Main {
 	public static void main(String[] args) {
 		Carte carte = new Carte(NOMBRE_VILLE);
 		Colonie colonie = new Colonie(NOMBRE_FOURMI);
-
+		
+		ArrayList<Arrete> meilleurCycle = algoFourmi(carte, colonie);
+		
+		System.out.println(carte.calculerDistanceChemin(meilleurCycle));
+		
 	}
 
-	public ArrayList<Ville> algoFourmi(Carte carte, Colonie colonie) {
-		ArrayList<Ville> meilleurCycle;
+	public static ArrayList<Arrete> algoFourmi(Carte carte, Colonie colonie) {
+		ArrayList<Arrete> meilleurCycle = new ArrayList<Arrete>();
 
 		carte.repartirFourmis(colonie);
+		
+		int j = 0;
 
-		while (!colonie.converge()) {
+		while (/*!colonie.converge()*/ j < 10) {
 			for (int i = 0; i < colonie.getNombreFourmi(); i++) {
 				Fourmi fourmiCourante = colonie.getFourmi(i);
 				while (!fourmiCourante.cheminFini()) {
@@ -36,6 +42,7 @@ public class Main {
 			carte.evaporation();
 			carte.deposerPheromone(colonie); //TODO
 			meilleurCycle = colonie.getMeilleurCycle();
+			j++;
 		}
 
 		return meilleurCycle;

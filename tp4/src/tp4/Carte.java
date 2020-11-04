@@ -2,7 +2,6 @@ package tp4;
 
 import java.util.ArrayList;
 import java.util.Random;
-import java.util.ArrayList;
 
 public class Carte {
 	public final static int LARGEUR = 100;
@@ -30,12 +29,13 @@ public class Carte {
 		for(int i = 0; i < nombreVille; i++) {
 			villeCourante = villes.get(i);
 			for(int j=i; j<nombreVille; j++) {
-				if  (!(arretes.contains(villeCourante))) {
-					arretes.add(new Arrete(villeCourante,villes.get(j)));
+				Ville deuxVille = villes.get(j);
+				if(!villeCourante.equals(deuxVille)) {
+					if  (!(arretes.contains(new Arrete(villeCourante,deuxVille)))) {
+						arretes.add(new Arrete(villeCourante, villes.get(j)));
+					}
 				}
-					
 			}
-			//TODO
 		}
 	}
 
@@ -47,12 +47,13 @@ public class Carte {
 		Random random = new Random();
 		Ville villeCC = villes.get(random.nextInt(villes.size()));
 		if(villesAlreadyUsed != null) {
-			while (villesAlreadyUsed.contains(new Arrete(villeCC))) {
+			while (villesAlreadyUsed.contains(new Arrete(villeCC, villeCC))) {
 				villeCC = villes.get(random.nextInt(villes.size()));
 			}
 		}
 		return villeCC;
 	}
+	
 
 	public ArrayList<Arrete> getArretes(){
 		return arretes;
@@ -90,12 +91,12 @@ public class Carte {
 			double distanceC = calculerDistanceChemin(chemin);
 			for (int j = 0; j < chemin.size(); j++) {
 				//Besoin d'aller rechercher dans l'att arretes de Carte ? (pointeurs?)
-				chemin.get(i).deposerPhe(Main.Q/distanceC);
+				chemin.get(j).deposerPhe(Main.Q/distanceC);
 			}
 		}
 	}
 
-	private double calculerDistanceChemin(ArrayList<Arrete> chemin) {
+	public double calculerDistanceChemin(ArrayList<Arrete> chemin) {
 		double distance = 0;
 		for (int i = 0; i < chemin.size(); i++) {
 			distance += chemin.get(i).getDistance();

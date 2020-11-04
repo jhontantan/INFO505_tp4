@@ -43,11 +43,6 @@ public class Arrete {
 	public Arrete(Ville ville1, Ville ville2) {
 		this(ville1, ville2, 0);
 	}
-	
-	
-	public Arrete(Ville ville1) {
-		this(ville1, null);
-	}
 
 	
 	public void evaporation() {
@@ -62,10 +57,10 @@ public class Arrete {
   		if(obj != null) {
   	  		if(obj instanceof Arrete) {
   	  		Arrete arrete = (Arrete) obj;
-  	  			if(arrete.ville2 == null && arrete.ville1 != null) {
-  	  				return arrete.ville1.equals(ville1) || arrete.ville1.equals(ville2);
-  	  			} else if(arrete.ville2 != null && arrete.ville1 == null) {
-  	  				return arrete.ville2.equals(ville2) || arrete.ville2.equals(ville1);
+  	  			if(arrete.ville1.equals(arrete.ville2)) {
+  	  				return arrete.ville1.equals(ville1) ||  arrete.ville1.equals(ville2);
+  	  			} else if(ville1.equals(ville2)) {
+  	  				return ville1.equals(arrete.ville1) ||  ville1.equals(arrete.ville2);
   	  			} else {
   	  				return (arrete.ville1.equals(ville1) || arrete.ville1.equals(ville2)) && (arrete.ville2.equals(ville1) || arrete.ville2.equals(ville2));
   	  			}
