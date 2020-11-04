@@ -35,7 +35,7 @@ public class Carte {
 	public ArrayList<Ville> getVilles(){
 		return villes;
 	}
-	
+
 	public Ville getRandomVilleNotIn(ArrayList<Arrete> villesAlreadyUsed){
 		Random random = new Random();
 		Ville villeCC = villes.get(random.nextInt(villes.size()));
@@ -49,7 +49,7 @@ public class Carte {
 	public ArrayList<Arrete> getArretes(){
 		return arretes;
 	}
-
+*/
 	public void repartirFourmis(Colonie colonie) {
 		for (int i = 0; i < colonie.getNombreFourmi(); i++) {
 			Fourmi fourmiCourante = colonie.getFourmi(i);
@@ -57,26 +57,26 @@ public class Carte {
 		}
 
 	}
-	
+
 	public double getDistance(Ville depart, Ville arrive){
 		int x = depart.getX() - arrive.getX();
 		int y = depart.getY() - arrive.getY();
-		return Math.sqrt(Math.pow(x,2) + Math.pow(y,2));	
+		return Math.sqrt(Math.pow(x,2) + Math.pow(y,2));
 	}
 
 	public Ville getVilleAleatoire() {
 		return villes.get((int) Math.random()*nombreVille);
 	}
 
-
+	/*
 	public void evaporation() {
 		for (int i = 0; i < arretes.size(); i++) {
 			arretes.get(i).evaporation();
 			//arretes.get(i)[3] = (arretes.get(i)[3] * (1 - Main.C));
 		}
-		
-	}
 
+	}
+	*/
 	public void deposerPheromone(Colonie col) {
 		for (int i = 0; i < col.getNombreFourmi(); i++) {
 			Fourmi fourmiC = col.getFourmi(i);
@@ -85,10 +85,10 @@ public class Carte {
 			//TODO
 		}
 	}
-	
+
 	private double calculerDistanceChemin(ArrayList<Ville> chemin) {
 		//TODO
-		
+
 		return 0;
 	}
 
