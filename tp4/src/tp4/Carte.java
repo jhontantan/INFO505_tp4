@@ -43,16 +43,70 @@ public class Carte {
 		return villes;
 	}
 
-	public Ville getRandomVilleNotIn(ArrayList<Arrete> villesAlreadyUsed){
-		Random random = new Random();
-		Ville villeCC = villes.get(random.nextInt(villes.size()));
-		if(villesAlreadyUsed != null) {
-			while (villesAlreadyUsed.contains(new Arrete(villeCC, villeCC))) {
-				villeCC = villes.get(random.nextInt(villes.size()));
+	public Ville getRandomVilleNotIn(Ville villeDepart, ArrayList<Arrete> arreteAlreadyUsed){
+		
+		ArrayList<Arrete> arreteNotUsed = arretes;
+		
+
+			arreteNotUsed = arretes;
+			
+			for (int i = 0; i < arretes.size(); i++) {
+				if(arreteAlreadyUsed != null) {
+					if(arreteAlreadyUsed.contains(arretes.get(i))) {
+						arreteNotUsed.remove(arretes.get(i));
+					}
+				}
 			}
-		}
-		return villeCC;
+				
+			for (int i = 0; i < arretes.size(); i++) {
+				if (!arretes.get(i).contient(villeDepart)) {
+					arreteNotUsed.remove(arretes.get(i));
+				}
+			}
+			
+			double probas[] = new double[arreteNotUsed.size()];
+			
+			
+			double probaPrecedente = 0;
+			for (int i = 0; i < probas.length; i++) {
+				probas[i] = probaPrecedente + getProba(arreteNotUsed.get(i), arreteNotUsed);
+				probaPrecedente = probas[i];
+			}
+			
+			double rand = Math.random();
+			
+			double lastProba = 0;
+			int i = 0;
+			
+			while(i < probas.length) {
+				if(rand <= probas[i] && rand > lastProba) {
+					break;
+				}
+				lastProba = probas[i];
+				i++;
+			}
+			
+			if(arreteNotUsed.get(i).getVille1().equals(villeDepart)) {
+				return arreteNotUsed.get(i).getVille2();
+			} else {
+				return arreteNotUsed.get(i).getVille1();
+			}
 	}
+	
+	public double getProba(Arrete arrete, ArrayList<Arrete> arreteNotUsed) {
+		
+		double termeHaut = Math.pow(arrete.getQtePhe(), Main.A) * Math.pow(1/arrete.getDistance(), Main.B);
+		
+		double termeBas = 0;
+		for (int i = 0; i < arreteNotUsed.size(); i++) {
+			termeBas += Math.pow(arreteNotUsed.get(i).getQtePhe(), Main.A) * Math.pow(1/arreteNotUsed.get(i).getDistance(), Main.B);
+		}
+
+		return termeHaut/termeBas;
+		
+
+	}
+	
 	
 
 	public ArrayList<Arrete> getArretes(){

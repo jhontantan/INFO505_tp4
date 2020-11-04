@@ -29,7 +29,9 @@ public class Fourmi {
 
 
 	public void villeSuivante(Carte carte) {
-		Ville villeRandom = carte.getRandomVilleNotIn(chemin);
+		Ville villeRandom = carte.getRandomVilleNotIn(villeCourante, chemin);
+		
+		
 		ArrayList<Arrete> arretes = carte.getArretes();
 		chemin.add(arretes.get(arretes.indexOf(new Arrete(villeCourante, villeRandom))));
 		villeCourante = villeRandom;

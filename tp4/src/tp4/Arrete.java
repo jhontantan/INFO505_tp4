@@ -41,7 +41,11 @@ public class Arrete {
 	
 	
 	public Arrete(Ville ville1, Ville ville2) {
-		this(ville1, ville2, 0);
+		this(ville1, ville2, 1);
+	}
+	
+	public boolean contient(Ville ville) {
+		return ville1.equals(ville) || ville2.equals(ville);
 	}
 
 	
