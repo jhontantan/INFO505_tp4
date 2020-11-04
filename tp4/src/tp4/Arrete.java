@@ -54,6 +54,10 @@ public class Arrete {
 		qtePhe = qtePhe * (1 - Main.C);
 	}
 	
+	public void deposerPhe(double qte) {
+		qtePhe += qte;
+	}
+	
   	public boolean equals(Object obj) {
   		if(obj != null) {
   	  		if(obj instanceof Arrete) {
