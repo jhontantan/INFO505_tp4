@@ -76,8 +76,18 @@ public class Carte {
 		
 	}
 
-	public void deposerPheromone() {
+	public void deposerPheromone(Colonie col) {
+		for (int i = 0; i < col.getNombreFourmi(); i++) {
+			Fourmi fourmiC = col.getFourmi(i);
+			double distanceC = calculerDistanceChemin(fourmiC.getChemin());
+			
+		}
+	}
+	
+	private double calculerDistanceChemin(ArrayList<Ville> chemin) {
 		
+		
+		return 0;
 	}
 
 

@@ -22,12 +22,16 @@ public class Fourmi {
 		return false;
 	}
 	
+	public ArrayList<Ville> getChemin(){
+		return chemin;
+	}
+	
 	/*
 	 public int cheminEffectue(int n) {
 		return n = chemin.size();
 	}
 	*/
-
+	
 
 	public boolean cheminFini() {
 		return chemin.size() == Main.NOMBRE_VILLE;

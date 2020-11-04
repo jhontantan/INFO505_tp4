@@ -19,6 +19,10 @@ public class Colonie {
 	public int getNombreFourmi() {
 		return nombreFourmi;
 	}
+	
+	public ArrayList<Fourmi> getColonie(){
+		return colonie;
+	}
 
 	public Fourmi getFourmi(int i) {
 		return colonie.get(i);

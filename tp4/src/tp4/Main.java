@@ -34,7 +34,7 @@ public class Main {
 			}
 
 			carte.evaporation();
-			carte.deposerPheromone(); //TODO
+			carte.deposerPheromone(colonie); //TODO
 			meilleurCycle = colonie.getMeilleurCycle();
 		}
 
