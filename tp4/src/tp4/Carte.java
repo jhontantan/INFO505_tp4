@@ -68,15 +68,14 @@ public class Carte {
 		return villes.get((int) Math.random()*nombreVille);
 	}
 
-	/*
 	public void evaporation() {
 		for (int i = 0; i < arretes.size(); i++) {
 			arretes.get(i).evaporation();
-			//arretes.get(i)[3] = (arretes.get(i)[3] * (1 - Main.C));
 		}
 
 	}
-	*/
+
+
 	public void deposerPheromone(Colonie col) {
 		for (int i = 0; i < col.getNombreFourmi(); i++) {
 			Fourmi fourmiC = col.getFourmi(i);
