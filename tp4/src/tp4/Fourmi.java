@@ -3,8 +3,8 @@ package tp4;
 import java.util.ArrayList;
 
 public class Fourmi {
-	private ArrayList<Arrete> chemin;
-	private Ville villeCourante;
+	private ArrayList<Arrete> chemin; //Le chemin parcouru pas la fourmi
+	private Ville villeCourante; //La ville actuelle ou se situe la fourmi
 
 
 	public Fourmi() {
@@ -12,10 +12,8 @@ public class Fourmi {
 	}
 
 
-	public boolean auDepart(Ville v) {
+	public void auDepart(Ville v) {
 		villeCourante = v;
-		chemin = new ArrayList<Arrete>();
-		return false;
 	}
 	
 	public ArrayList<Arrete> getChemin(){
@@ -23,18 +21,20 @@ public class Fourmi {
 	}
 	
 
-	public boolean cheminFini() {
+	public boolean cheminFini() { //Test si le cycle fourmi est termine
 		return chemin.size() == Main.NOMBRE_VILLE-1;
 	}
 
 
-	public void villeSuivante(Carte carte) {
-		Ville villeRandom = carte.getRandomVilleNotIn(villeCourante, chemin);
+	public void villeSuivante(Carte carte) { //La fourmi passe a la ville suivante
+		Arrete randomArrete = carte.getRandomArreteNotIn(villeCourante, chemin);
+		chemin.add(randomArrete); 
 		
-		
-		ArrayList<Arrete> arretes = carte.getArretes();
-		chemin.add(arretes.get(arretes.indexOf(new Arrete(villeCourante, villeRandom))));
-		villeCourante = villeRandom;
+		if(randomArrete.getVille1().equals(villeCourante)) { //On actualise la ville courante
+			villeCourante = randomArrete.getVille2();
+		} else {
+			villeCourante = randomArrete.getVille1();
+		}
 	}
 
 }

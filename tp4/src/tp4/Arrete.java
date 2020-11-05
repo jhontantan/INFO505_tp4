@@ -7,7 +7,7 @@ public class Arrete {
 	private double distance;
 	private double qtePhe;
 	
-	public Arrete(Ville ville1, Ville ville2, double qtePhe ) {
+	public Arrete(Ville ville1, Ville ville2, double qtePhe) {
 		this.ville1=ville1;
 		this.ville2=ville2;
 		this.qtePhe=qtePhe;
@@ -21,6 +21,12 @@ public class Arrete {
 		}
 		
 	}
+	
+	public Arrete(Ville ville1, Ville ville2) {
+		this(ville1, ville2, 1);
+		//On initialise la qte de pheromone à 1 et non à 0, sinon on ne peut pas calculer la probabilite de passage à une autre ville
+	}
+	
 
 	public Ville getVille2() {
 		return ville2;
@@ -38,11 +44,6 @@ public class Arrete {
 		return qtePhe;
 	}
 	
-	
-	
-	public Arrete(Ville ville1, Ville ville2) {
-		this(ville1, ville2, 1);
-	}
 	
 	public boolean contient(Ville ville) {
 		return ville1.equals(ville) || ville2.equals(ville);

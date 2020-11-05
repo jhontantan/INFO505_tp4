@@ -13,7 +13,7 @@ public class Ville {
   		this.y = y;
   	}
 
-  	public Ville() {
+  	public Ville() { //Initialisation d'une ville placee aleatoirement
   		this((int) (Math.random() * Carte.LARGEUR), (int) (Math.random() * Carte.HAUTEUR));
   	}
   	

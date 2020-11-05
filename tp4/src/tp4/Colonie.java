@@ -28,14 +28,20 @@ public class Colonie {
 		return colonie.get(i);
 	}
 
-	public ArrayList<Arrete> getMeilleurCycle() {
+	public ArrayList<Arrete> getMeilleurCycle() { //Retourne le chemin le plus court emprunte par une des fourmis
 		ArrayList<Arrete> meilleurCycle = new ArrayList<Arrete>();
+		
 		double meilleurDistance = 0;
 		boolean premierTour = true;
+		
 		for (int i = 0; i < colonie.size(); i++) {
+			
 			Fourmi fourmiC = getFourmi(i);
+			
 			ArrayList<Arrete> cycleCourrant = fourmiC.getChemin();
+			
 			double distanceCourante = calculerDistanceChemin(cycleCourrant);
+			
 			if(distanceCourante < meilleurDistance || premierTour) {
 				premierTour = false;
 				meilleurDistance = distanceCourante;

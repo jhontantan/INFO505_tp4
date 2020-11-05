@@ -10,37 +10,38 @@ public class Main {
 	public final static int B = 1;
 
 	public final static int NOMBRE_VILLE = 5;
-	public final static int NOMBRE_FOURMI = 10;
+	public final static int NOMBRE_FOURMI = 50;
 
 
 	public static void main(String[] args) {
-		Carte carte = new Carte(NOMBRE_VILLE);
-		Colonie colonie = new Colonie(NOMBRE_FOURMI);
+		Carte carte = new Carte(NOMBRE_VILLE); //Generation de la carte (placement aleatoire des villes)
+		Colonie colonie = new Colonie(NOMBRE_FOURMI); //Initialisation des fourmis
 		
-		ArrayList<Arrete> meilleurCycle = algoFourmi(carte, colonie);
-		
-		System.out.println(carte.calculerDistanceChemin(meilleurCycle));
+		for (int i = 0; i < 20; i++) {
+			ArrayList<Arrete> meilleurCycle = algoFourmi(carte, colonie);
+			System.out.println(carte.calculerDistanceChemin(meilleurCycle));
+		}
+
 		
 	}
 
 	public static ArrayList<Arrete> algoFourmi(Carte carte, Colonie colonie) {
 		ArrayList<Arrete> meilleurCycle = new ArrayList<Arrete>();
 
-		carte.repartirFourmis(colonie);
+		carte.repartirFourmis(colonie); //Repartition aleatoire des fourmis sur la carte
 		
 		int j = 0;
 
-		while (/*!colonie.converge()*/ j < 10) {
+		while (/*!colonie.converge()*/ j < 100) {
 			for (int i = 0; i < colonie.getNombreFourmi(); i++) {
 				Fourmi fourmiCourante = colonie.getFourmi(i);
-				while (!fourmiCourante.cheminFini()) {
-					fourmiCourante.villeSuivante(carte);
-					//La fourmis change de ville (on actualise aussi son chemin)
+				while (!fourmiCourante.cheminFini()) { //Si le cycle fourmi n'est pas termine
+					fourmiCourante.villeSuivante(carte); //Alors la fourmi se deplace sur la ville suivante
 				}
 			}
 
 			carte.evaporation();
-			carte.deposerPheromone(colonie); //TODO
+			carte.deposerPheromone(colonie);
 			meilleurCycle = colonie.getMeilleurCycle();
 			j++;
 		}

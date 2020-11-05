@@ -7,32 +7,41 @@ public class Carte {
 	public final static int LARGEUR = 100;
 	public final static int HAUTEUR = 100;
 
-
 	private int nombreVille;
+	
 	private ArrayList<Ville> villes;
+	
 	private ArrayList<Arrete> arretes;
 
 	public Carte(int nombreVille) {
+		
 		villes = new ArrayList<Ville>();
+		
 		arretes = new ArrayList<Arrete>();
+		
 		this.nombreVille = nombreVille;
 
 		for (int i = 0; i < nombreVille; i++) {
 			villes.add(new Ville());
 		}
-		initialiserArretes();
+		
+		initialiserArretes(); //Initialise toutes les liaisons entre les villes en evitant les doublons (arrete[v1 -> v2] <=> arrete[v2 -> v1])
 	}
 
 	
 	private void initialiserArretes() {
-		Ville villeCourante;
-		for(int i = 0; i < nombreVille; i++) {
-			villeCourante = villes.get(i);
-			for(int j=i; j<nombreVille; j++) {
-				Ville deuxVille = villes.get(j);
-				if(!villeCourante.equals(deuxVille)) {
-					if  (!(arretes.contains(new Arrete(villeCourante,deuxVille)))) {
-						arretes.add(new Arrete(villeCourante, villes.get(j)));
+		
+		Ville villeCourante1;
+		Ville villeCourante2;
+		
+		for (int i = 0; i < nombreVille; i++) {
+			villeCourante1 = villes.get(i);
+			for (int j=i; j<nombreVille; j++) {
+				villeCourante2 = villes.get(j);
+				if(!villeCourante1.equals(villeCourante2)) {
+					//On verifie si le tableau arretes ne contient pas deja une arrete du même type (voir Arrete.equals())
+					if(!(arretes.contains(new Arrete(villeCourante1, villeCourante2)))) {
+						arretes.add(new Arrete(villeCourante1, villes.get(j)));
 					}
 				}
 			}
@@ -43,68 +52,77 @@ public class Carte {
 		return villes;
 	}
 
-	public Ville getRandomVilleNotIn(Ville villeDepart, ArrayList<Arrete> arreteAlreadyUsed){
+	public Arrete getRandomArreteNotIn(Ville villeDepart, ArrayList<Arrete> arreteAlreadyUsed){
 		
-		ArrayList<Arrete> arreteNotUsed = arretes;
+		ArrayList<Arrete> arreteNotUsed = new ArrayList<Arrete>(arretes);
 		
-
-			arreteNotUsed = arretes;
-			
-			for (int i = 0; i < arretes.size(); i++) {
-				if(arreteAlreadyUsed != null) {
-					if(arreteAlreadyUsed.contains(arretes.get(i))) {
-						arreteNotUsed.remove(arretes.get(i));
-					}
-				}
-			}
-				
-			for (int i = 0; i < arretes.size(); i++) {
-				if (!arretes.get(i).contient(villeDepart)) {
+		for (int i = 0; i < arretes.size(); i++) {//Supression des arretes deja utilisees
+			if(arreteAlreadyUsed != null) {
+				if(arreteAlreadyUsed.contains(arretes.get(i))) {
 					arreteNotUsed.remove(arretes.get(i));
 				}
 			}
+		}
 			
-			double probas[] = new double[arreteNotUsed.size()];
-			
-			
-			double probaPrecedente = 0;
-			for (int i = 0; i < probas.length; i++) {
-				probas[i] = probaPrecedente + getProba(arreteNotUsed.get(i), arreteNotUsed);
-				probaPrecedente = probas[i];
+		for (int i = 0; i < arretes.size(); i++) {//Supression des arrete qui ne contiennent pas la ville sur laquelle est actuelement la fourmi (elle ne peut pas se teleporter)
+			if (!arretes.get(i).contient(villeDepart)) {
+				arreteNotUsed.remove(arretes.get(i));
 			}
-			
-			double rand = Math.random();
-			
-			double lastProba = 0;
-			int i = 0;
-			
-			while(i < probas.length) {
-				if(rand <= probas[i] && rand > lastProba) {
-					break;
-				}
-				lastProba = probas[i];
-				i++;
-			}
-			
-			if(arreteNotUsed.get(i).getVille1().equals(villeDepart)) {
-				return arreteNotUsed.get(i).getVille2();
-			} else {
-				return arreteNotUsed.get(i).getVille1();
-			}
+		}
+		
+		
+		return getArreteSuivanteParProba(arreteNotUsed);
+
 	}
 	
+	private Arrete getArreteSuivanteParProba(ArrayList<Arrete> arreteNotUsed) {
+		
+		/*
+		 * Dans un premier temps on calcul la probablite que la fourmi a d'emprunter chaque arrete
+		 * La somme de toute ces probas est egale à 1
+		 * On somme alors ces probabilites tel que P0' = P0 | P1' = P0 + P1 | P2' = P0 + P1 + P2 .... etc
+		 * On genere ensuite un nombre random entre 1 et 0
+		 * Et on selectionne l'arrete qui a la proba >= a ce nombre la plus proche
+		 */
+		
+		double probas[] = new double[arreteNotUsed.size()];
+		double probaPrecedente = 0;
+		
+		for (int i = 0; i < probas.length; i++) { //Generation de toutes les probas
+			probas[i] = probaPrecedente + getProba(arreteNotUsed.get(i), arreteNotUsed); //Et somme des probabilites
+			probaPrecedente = probas[i];
+		}
+		
+		double rand = Math.random(); //Generation du nombre aleatoire
+		
+		double lastProba = 0;
+		int i = 0;
+		
+		while(i < probas.length) { //Selection de l'arrete (de son indice dans probas[])
+			if(rand <= probas[i] && rand > lastProba) {
+				break;
+			}
+			lastProba = probas[i];
+			i++;
+		}
+		
+		return arreteNotUsed.get(i);
+	}
+	
+	
+	 //Retourne la proba que la fourmi courante se deplace sur la ville suivante en utilisant l'arrete passee en parametre
 	public double getProba(Arrete arrete, ArrayList<Arrete> arreteNotUsed) {
 		
 		double termeHaut = Math.pow(arrete.getQtePhe(), Main.A) * Math.pow(1/arrete.getDistance(), Main.B);
 		
 		double termeBas = 0;
+		
 		for (int i = 0; i < arreteNotUsed.size(); i++) {
 			termeBas += Math.pow(arreteNotUsed.get(i).getQtePhe(), Main.A) * Math.pow(1/arreteNotUsed.get(i).getDistance(), Main.B);
 		}
 
 		return termeHaut/termeBas;
-		
-
+	
 	}
 	
 	
@@ -122,13 +140,15 @@ public class Carte {
 	}
 
 	public double getDistance(Ville depart, Ville arrive){
+		
 		int x = depart.getX() - arrive.getX();
 		int y = depart.getY() - arrive.getY();
+		
 		return Math.sqrt(Math.pow(x,2) + Math.pow(y,2));
 	}
 
 	public Ville getVilleAleatoire() {
-		return villes.get((int) Math.random()*nombreVille);
+		return villes.get((int) (Math.random()*nombreVille));
 	}
 
 	public void evaporation() {
@@ -140,18 +160,21 @@ public class Carte {
 
 	public void deposerPheromone(Colonie col) {
 		for (int i = 0; i < col.getNombreFourmi(); i++) {
+			
 			Fourmi fourmiC = col.getFourmi(i);
 			ArrayList<Arrete> chemin = fourmiC.getChemin();
 			double distanceC = calculerDistanceChemin(chemin);
+			
 			for (int j = 0; j < chemin.size(); j++) {
-				//Besoin d'aller rechercher dans l'att arretes de Carte ? (pointeurs?)
 				chemin.get(j).deposerPhe(Main.Q/distanceC);
 			}
 		}
 	}
 
 	public double calculerDistanceChemin(ArrayList<Arrete> chemin) {
+		
 		double distance = 0;
+		
 		for (int i = 0; i < chemin.size(); i++) {
 			distance += chemin.get(i).getDistance();
 		}
