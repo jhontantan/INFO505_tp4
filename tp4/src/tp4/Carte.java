@@ -88,7 +88,7 @@ public class Carte {
 		double probas[] = new double[arreteNotUsed.size()];
 		double probaPrecedente = 0;
 		
-		for (int i = 0; i < probas.length; i++) { //Generation de toutes les probas
+		for (int i = 0; i < arreteNotUsed.size(); i++) { //Generation de toutes les probas
 			probas[i] = probaPrecedente + getProba(arreteNotUsed.get(i), arreteNotUsed); //Et somme des probabilites
 			probaPrecedente = probas[i];
 		}
