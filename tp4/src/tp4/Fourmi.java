@@ -14,6 +14,7 @@ public class Fourmi {
 
 	public void auDepart(Ville v) {
 		villeCourante = v;
+		chemin = new ArrayList<Arrete>();
 	}
 	
 	public ArrayList<Arrete> getChemin(){
