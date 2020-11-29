@@ -2,8 +2,14 @@ package tp4;
 
 import java.util.ArrayList;
 
-public class Main {
+import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
+
+import view.*;
+
+public class Main extends JPanel {
 	
+	private static final long serialVersionUID = 1L;
 	public final static int Q = 1;
 	public final static double C = 0.7;
 	public final static int A = 1;
@@ -11,20 +17,32 @@ public class Main {
 
 	public final static int NOMBRE_VILLE = 15;
 	public final static int NOMBRE_FOURMI = 500;
+	public final static int NOMBRE_CYCLE= 10;
+	
+	private int NombreVille;
+	private int NombreFourmi;
+	private int NombreCycle;
+
 
 
 	public static void main(String[] args) {
+		
 		Carte carte = new Carte(NOMBRE_VILLE); //Generation de la carte (placement aleatoire des villes)
 		
-		for (int i = 0; i < 10; i++) {
+		
+		
+		for (int i = 0; i < NOMBRE_CYCLE; i++) {
 			Colonie colonie = new Colonie(NOMBRE_FOURMI); //Initialisation des fourmis
+			//repaint();
 			ArrayList<Arrete> meilleurCycle = algoFourmi(carte, colonie);
 			System.out.println(carte.calculerDistanceChemin(meilleurCycle));
 		}
-
 		
-	}
-
+		
+		}
+		
+	
+	
 	public static ArrayList<Arrete> algoFourmi(Carte carte, Colonie colonie) {
 		ArrayList<Arrete> meilleurCycle = new ArrayList<Arrete>();
 
@@ -65,5 +83,49 @@ public class Main {
 		}
 
 	}
+
+
+
+
+	public int getNombreVille() {
+		return NombreVille;
+	}
+
+
+
+
+	public void setNombreVille(int nombreVille) {
+		NombreVille = nombreVille;
+	}
+
+
+
+
+	public int getNombreFourmi() {
+		return NombreFourmi;
+	}
+
+
+
+
+	public void setNombreFourmi(int nombreFourmi) {
+		NombreFourmi = nombreFourmi;
+	}
+
+
+
+
+	public int getNombreCycle() {
+		return NombreCycle;
+	}
+
+
+
+
+	public void setNombreCycle(int nombreCycle) {
+		NombreCycle = nombreCycle;
+	}
+	
+	
 
 }
