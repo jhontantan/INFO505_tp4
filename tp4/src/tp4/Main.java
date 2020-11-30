@@ -1,8 +1,19 @@
 package tp4;
 
+import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.util.ArrayList;
 
-public class Main {
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
+import javax.swing.WindowConstants;
+
+import Fenetre.*;
+
+
+@SuppressWarnings("serial")
+public class Main extends JPanel{
 	
 	public final static int Q = 1;
 	public final static double C = 0.7;
@@ -11,16 +22,28 @@ public class Main {
 
 	public final static int NOMBRE_VILLE = 15;
 	public final static int NOMBRE_FOURMI = 500;
+	public final static int NOMBRE_CYCLE= 3;
+	
+	private static Carte carte;
+	private static Colonie colonie;
+	//private static ArrayList<Colonie> lsColonie;
+
 
 
 	public static void main(String[] args) {
-		Carte carte = new Carte(NOMBRE_VILLE); //Generation de la carte (placement aleatoire des villes)
+		 carte = new Carte(NOMBRE_VILLE); //Generation de la carte (placement aleatoire des villes)
 		
-		for (int i = 0; i < 10; i++) {
-			Colonie colonie = new Colonie(NOMBRE_FOURMI); //Initialisation des fourmis
+		for (int i = 0; i < NOMBRE_CYCLE; i++) {
+			colonie = new Colonie(NOMBRE_FOURMI); //Initialisation des fourmis
 			ArrayList<Arrete> meilleurCycle = algoFourmi(carte, colonie);
 			System.out.println(carte.calculerDistanceChemin(meilleurCycle));
 		}
+		
+		SwingUtilities.invokeLater(new Runnable() {
+	         public void run() {
+	            Fenetre();
+	         }
+	      });
 
 		
 	}
@@ -65,5 +88,26 @@ public class Main {
 		}
 
 	}
+	
+	private static void Fenetre()  {
+    	JFrame frame = new JFrame("INFO505");
+
+    //	UIManager.setLookAndFeel(new NimbusLookAndFeel());
+       // setTitle("INFO504"); 
+    	frame.setMinimumSize(new Dimension(800, 800));
+        frame.setLocationRelativeTo(null);
+
+        //Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+        //frame.setLocation(dim.width / 2 - getWidth() / 2, dim.height / 2 - getHeight() / 2);
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+
+        frame.setLayout(new BorderLayout());
+
+       // add(new RightPanel(), BorderLayout.EAST);
+        frame.add(new CenterPanel(carte), BorderLayout.CENTER);
+    
+        frame.pack();
+        frame.setVisible(true);
+    }
 
 }
