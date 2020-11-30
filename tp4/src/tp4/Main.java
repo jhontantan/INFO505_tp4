@@ -14,16 +14,6 @@ import Fenetre.*;
 
 @SuppressWarnings("serial")
 public class Main extends JPanel{
-	/*
-	public final static int Q = 1;
-	public final static double C = 0.7;
-	public final static int A = 1;
-	public final static int B = 1;
-
-	public final static int NOMBRE_VILLE = 15;
-	public final static int NOMBRE_FOURMI = 500;
-	public final static int NOMBRE_CYCLE= 1;
-	*/
 	
 	//private static ArrayList<Colonie> lsColonie;
 

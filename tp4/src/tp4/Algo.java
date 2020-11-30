@@ -54,7 +54,7 @@ public class Algo {
 			
 			carte.evaporation();
 			carte.deposerPheromone(colonie);
-			meilleurCycle = garderMeilleurCycle(carte, colonie.getMeilleurCycle(), meilleurCycle);
+			meilleurCycle = garderMeilleurCycle(colonie.getMeilleurCycle(), meilleurCycle);
 			carte.repartirFourmis(colonie);
 			j++;
 		}
@@ -62,9 +62,9 @@ public class Algo {
 		return meilleurCycle;
 	}
 	
-	private ArrayList<Arrete> garderMeilleurCycle(Carte carte, ArrayList<Arrete> cycle1, ArrayList<Arrete> cycle2){
-		double dist1 = carte.calculerDistanceChemin(cycle1);
-		double dist2 = carte.calculerDistanceChemin(cycle2);
+	private ArrayList<Arrete> garderMeilleurCycle(ArrayList<Arrete> cycle1, ArrayList<Arrete> cycle2){
+		double dist1 = Carte.calculerDistanceChemin(cycle1);
+		double dist2 = Carte.calculerDistanceChemin(cycle2);
 		if(dist1 == 0) {
 			return cycle2;
 		} else if (dist2 == 0) {
