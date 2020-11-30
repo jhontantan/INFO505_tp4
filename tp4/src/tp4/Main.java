@@ -22,11 +22,11 @@ public class Main extends JPanel{
 
 	public final static int NOMBRE_VILLE = 15;
 	public final static int NOMBRE_FOURMI = 500;
-	public final static int NOMBRE_CYCLE= 3;
+	public final static int NOMBRE_CYCLE= 1;
 	
 	private static Carte carte;
 	private static Colonie colonie;
-	//private static ArrayList<Colonie> lsColonie;
+	private static ArrayList<Colonie> lsColonie;
 
 
 
@@ -50,6 +50,8 @@ public class Main extends JPanel{
 
 	public static ArrayList<Arrete> algoFourmi(Carte carte, Colonie colonie) {
 		ArrayList<Arrete> meilleurCycle = new ArrayList<Arrete>();
+		lsColonie= new ArrayList<Colonie>();
+
 
 		carte.repartirFourmis(colonie); //Repartition aleatoire des fourmis sur la carte
 		//ATTENTION reinitialiser le chemin des fourmis
@@ -65,8 +67,8 @@ public class Main extends JPanel{
 			
 			carte.evaporation();
 			carte.deposerPheromone(colonie);
+			lsColonie.add(colonie);
 			meilleurCycle = garderMeilleurCycle(carte, colonie.getMeilleurCycle(), meilleurCycle);
-			
 			carte.repartirFourmis(colonie);
 			j++;
 		}
@@ -109,5 +111,11 @@ public class Main extends JPanel{
         frame.pack();
         frame.setVisible(true);
     }
+
+	public static ArrayList<Colonie> getLsColonie() {
+		return lsColonie;
+	}
+	
+	
 
 }

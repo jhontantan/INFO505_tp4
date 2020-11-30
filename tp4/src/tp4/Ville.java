@@ -13,7 +13,9 @@ public class Ville {
   		this.y = y;
   	}
 
-  	public Ville() { //Initialisation d'une ville placee aleatoirement
+  	
+
+	public Ville() { //Initialisation d'une ville placee aleatoirement
   		this((int) (Math.random() * Carte.LARGEUR), (int) (Math.random() * Carte.HAUTEUR));
   	}
   	
@@ -38,6 +40,10 @@ public class Ville {
   		}
   		return false;  		
   	}
-
+  	
+  	@Override
+	public String toString() {
+		return "Ville [x=" + x + ", y=" + y + ", id=" + id + "]";
+	}
 
   }

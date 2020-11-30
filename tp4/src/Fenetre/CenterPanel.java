@@ -40,7 +40,7 @@ public class CenterPanel extends JPanel{
    // Jeu jeu = new Jeu();
 
 	public CenterPanel(Carte carte) {
-		//this.lsColonie = Main.getLsColonie();
+		this.lsColonie = Main.getLsColonie();
 		this.carte=carte;
         setBackground(Color.WHITE);
         
@@ -71,6 +71,7 @@ public class CenterPanel extends JPanel{
    //::  List<Point> graphPointsArrete = new ArrayList<>();
      //   for (int i = 0; i < 1; i++) {
     	//	System.out.println(lsColonie.get(1).getFourmi(499));
+    	//	System.out.println(lsColonie.get(1).getFourmi(499).getChemin().get(1).);
 
         //	Fourmi fourmiCourante = lsColonie.get(1);
         	//Arrete arreteCourante = fourmiCourante.getChemin().get(0);
