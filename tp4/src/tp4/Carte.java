@@ -29,12 +29,6 @@ public class Carte {
 	}
 
 	
-	public Carte() {
-		
-		
-	}
-
-
 	private void initialiserArretes() {
 		
 		Ville villeCourante1;
@@ -45,7 +39,7 @@ public class Carte {
 			for (int j=i; j<nombreVille; j++) {
 				villeCourante2 = villes.get(j);
 				if(!villeCourante1.equals(villeCourante2)) {
-					//On verifie si le tableau arretes ne contient pas deja une arrete du mï¿½me type (voir Arrete.equals())
+					//On verifie si le tableau arretes ne contient pas deja une arrete du même type (voir Arrete.equals())
 					if(!(arretes.contains(new Arrete(villeCourante1, villeCourante2)))) {
 						arretes.add(new Arrete(villeCourante1, villes.get(j)));
 					}
@@ -85,7 +79,7 @@ public class Carte {
 		
 		/*
 		 * Dans un premier temps on calcul la probablite que la fourmi a d'emprunter chaque arrete
-		 * La somme de toute ces probas est egale ï¿½ 1
+		 * La somme de toute ces probas est egale à 1
 		 * On somme alors ces probabilites tel que P0' = P0 | P1' = P0 + P1 | P2' = P0 + P1 + P2 .... etc
 		 * On genere ensuite un nombre random entre 1 et 0
 		 * Et on selectionne l'arrete qui a la proba >= a ce nombre la plus proche

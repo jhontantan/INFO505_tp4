@@ -24,7 +24,7 @@ public class Arrete {
 	
 	public Arrete(Ville ville1, Ville ville2) {
 		this(ville1, ville2, 1);
-		//On initialise la qte de pheromone ï¿½ 1 et non ï¿½ 0, sinon on ne peut pas calculer la probabilite de passage ï¿½ une autre ville
+		//On initialise la qte de pheromone à 1 et non à 0, sinon on ne peut pas calculer la probabilite de passage à une autre ville
 	}
 	
 
