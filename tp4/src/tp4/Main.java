@@ -28,13 +28,9 @@ public class Main extends JPanel {
 	public static void main(String[] args) {
 		
 		Carte carte = new Carte(NOMBRE_VILLE); //Generation de la carte (placement aleatoire des villes)
-		/*
-		SwingUtilities.invokeLater(new Runnable() {
-	         public void run() {
-	          new  Fenetre(carte);
-	         }
-	      });
-		*/
+		
+		
+		
 		for (int i = 0; i < NOMBRE_CYCLE; i++) {
 			Colonie colonie = new Colonie(NOMBRE_FOURMI); //Initialisation des fourmis
 			//repaint();
