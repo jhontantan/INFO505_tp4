@@ -50,8 +50,8 @@ public class Arrete {
 	}
 
 	
-	public void evaporation() {
-		qtePhe = qtePhe * (1 - Main.C);
+	public void evaporation(double c) {
+		qtePhe = qtePhe * (1 - c);
 	}
 	
 	public void deposerPhe(double qte) {

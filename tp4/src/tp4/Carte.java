@@ -1,19 +1,27 @@
 package tp4;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 public class Carte {
 	public final static int LARGEUR = 100;
 	public final static int HAUTEUR = 100;
 
 	private int nombreVille;
+	private int a;
+	private int b;
+	private int q;
+	private double c;
 	
 	private ArrayList<Ville> villes;
 	
 	private ArrayList<Arrete> arretes;
 
-	public Carte(int nombreVille) {
+	public Carte(int nombreVille, int a, int b, int q, double c) {
+		
+		this.a = a;
+		this.b = b;
+		this.q = q;
+		this.c = c;
 		
 		villes = new ArrayList<Ville>();
 		
@@ -113,12 +121,12 @@ public class Carte {
 	 //Retourne la proba que la fourmi courante se deplace sur la ville suivante en utilisant l'arrete passee en parametre
 	public double getProba(Arrete arrete, ArrayList<Arrete> arreteNotUsed) {
 		
-		double termeHaut = Math.pow(arrete.getQtePhe(), Main.A) * Math.pow(1/arrete.getDistance(), Main.B);
+		double termeHaut = Math.pow(arrete.getQtePhe(), a) * Math.pow(1/arrete.getDistance(), b);
 		
 		double termeBas = 0;
 		
 		for (int i = 0; i < arreteNotUsed.size(); i++) {
-			termeBas += Math.pow(arreteNotUsed.get(i).getQtePhe(), Main.A) * Math.pow(1/arreteNotUsed.get(i).getDistance(), Main.B);
+			termeBas += Math.pow(arreteNotUsed.get(i).getQtePhe(), a) * Math.pow(1/arreteNotUsed.get(i).getDistance(), b);
 		}
 
 		return termeHaut/termeBas;
@@ -153,7 +161,7 @@ public class Carte {
 
 	public void evaporation() {
 		for (int i = 0; i < arretes.size(); i++) {
-			arretes.get(i).evaporation();
+			arretes.get(i).evaporation(c);
 		}
 	}
 
@@ -166,13 +174,12 @@ public class Carte {
 			double distanceC = calculerDistanceChemin(chemin);
 			
 			for (int j = 0; j < chemin.size(); j++) {
-				chemin.get(j).deposerPhe(Main.Q/distanceC);
+				chemin.get(j).deposerPhe(q/distanceC);
 			}
 		}
 	}
 
-	public double calculerDistanceChemin(ArrayList<Arrete> chemin) {
-		
+	public static double calculerDistanceChemin(ArrayList<Arrete> chemin) {	
 		double distance = 0;
 		
 		for (int i = 0; i < chemin.size(); i++) {

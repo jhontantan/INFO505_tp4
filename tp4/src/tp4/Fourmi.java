@@ -22,8 +22,8 @@ public class Fourmi {
 	}
 	
 
-	public boolean cheminFini() { //Test si le cycle fourmi est termine
-		return chemin.size() == Main.NOMBRE_VILLE-1;
+	public boolean cheminFini(int nombreVille) { //Test si le cycle fourmi est termine
+		return chemin.size() == nombreVille-1;
 	}
 
 
