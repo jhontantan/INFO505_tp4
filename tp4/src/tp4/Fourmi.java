@@ -30,7 +30,6 @@ public class Fourmi {
 
 
 	public void villeSuivante(Carte carte) { //La fourmi passe a la ville suivante
-		System.out.println(cheminToVilles(chemin));
 		Arrete randomArrete = carte.getRandomArreteNotIn(villeCourante, villePrec, cheminToVilles(chemin));
 		
 		chemin.add(randomArrete); 
