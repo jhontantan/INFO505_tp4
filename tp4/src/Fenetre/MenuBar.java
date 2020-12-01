@@ -14,23 +14,24 @@ public class MenuBar extends JToolBar implements ActionListener{
 
 	JButton start = new JButton("Start");
 	JTextField Nbfourmi = new JTextField(4);
-	JTextField NbCycle = new JTextField(4);
+	//JTextField NbCycle = new JTextField(4);
 	JTextField NbVille = new JTextField(4);
 
     public MenuBar() {
         
-    	add(new JLabel(" Quantité fourmis : "));
+    	add(new JLabel(" Quantite fourmis : "));
         add(Nbfourmi);
         addSeparator();
 
-        add(new JLabel(" Quantité villes : "));
+        add(new JLabel(" Quantite villes : "));
         add(NbVille);
         addSeparator();
-
+        /*
         add(new JLabel("Quantité Cycles :"));
         add(NbCycle);        
         add(new JLabel(""));
         addSeparator();
+        */
 
         start.addActionListener(this);
         add(start);    
@@ -44,14 +45,14 @@ public class MenuBar extends JToolBar implements ActionListener{
         	
         	JFrame frame = (JFrame)this.getRootPane().getParent(); 
      	
-        	if(NbVille.getText().isEmpty() || Nbfourmi.getText().isEmpty() || NbCycle.getText().isEmpty()) {
+        	if(NbVille.getText().isEmpty() || Nbfourmi.getText().isEmpty() /*|| NbCycle.getText().isEmpty()*/) {
            	 	frame.dispose();
            	 	 algo = new Algo();  
         	}
         	else {
         	  	int JfieldVille = Integer.parseInt(NbVille.getText());
         	  	int JfieldFourmis = Integer.parseInt(Nbfourmi.getText());
-        	  	int JfieldCycles = Integer.parseInt(NbCycle.getText());
+        	  	//int JfieldCycles = Integer.parseInt(NbCycle.getText());
 
         	  	frame.dispose();
         	
@@ -61,8 +62,8 @@ public class MenuBar extends JToolBar implements ActionListener{
         	  	int q = 1;
         	  	int nombreVille = JfieldVille;
         	  	int nombreFourmi = JfieldFourmis;
-        	  	int nombreCycle = JfieldCycles;
-        	  	algo = new Algo(q, c, a, b, nombreVille, nombreFourmi, nombreCycle);
+        	  	//int nombreCycle = JfieldCycles;
+        	  	algo = new Algo(q, c, a, b, nombreVille, nombreFourmi, 1);
         	}
         	try {
 				new Fenetre(algo);
