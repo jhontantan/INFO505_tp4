@@ -5,6 +5,15 @@ import java.util.Observable;
 
 public class Algo extends Observable  {
 	
+	/*
+	int a = 1;
+	int b = 1;
+	double c = 0.7;
+	int q = 1;
+	int nombreVille = 15;
+	int nombreFourmi = 1;
+	int nombreCycle = 1;*/
+	
 	private int q;
 	private double c;
 	private int a;
@@ -12,10 +21,12 @@ public class Algo extends Observable  {
 	private int nombreVille;
 	private int nombreFourmi;
 	private int nombreCycle;
-	
+	private ArrayList<Arrete> ArretesMC;
+
+	 
 	private Carte carte;
 	private Colonie colonie;
-	private ArrayList<Colonie> cheminColonie;
+
 	
 
 	public Algo(int q, double c, int a, int b, int nombreVille, int nombreFourmi, int nombreCycle) {
@@ -29,18 +40,13 @@ public class Algo extends Observable  {
 		
 		carte = new Carte(nombreVille, a, b, q, c); //Generation de la carte (placement aleatoire des villes)
 		colonie = new Colonie(nombreFourmi); //Initialisation des fourmis
+
 	}
-	
-	public Carte getCarte() {
-		return carte;
-	}
-	
-	public Colonie getColonie() {
-		return colonie;
-	}
+
 	
 	public ArrayList<Arrete> algoFourmi() { //Retourne le meilleur cycle
 		ArrayList<Arrete> meilleurCycle = new ArrayList<Arrete>();
+		//ArretesMC = new ArrayList<Arrete>();
 
 		carte.repartirFourmis(colonie); //Repartition aleatoire des fourmis sur la carte
 		//ATTENTION reinitialiser le chemin des fourmis
@@ -53,22 +59,27 @@ public class Algo extends Observable  {
 					fourmiCourante.villeSuivante(carte); //Alors la fourmi se deplace sur la ville suivante
 				}
 			}
-			
-			//System.out.println(colonie.getNombreFourmi());
-
-			
-			
+	
 			carte.evaporation();
 			carte.deposerPheromone(colonie);
 			
-			System.out.println("size "+colonie.getFourmi(0).getChemin().size());
+		//	System.out.println("avant"+colonie.getFourmi(0).getChemin().size());
 
 			meilleurCycle = garderMeilleurCycle(colonie.getMeilleurCycle(), meilleurCycle);
+		//	System.out.println("ID: "+colonie.getFourmi(0).getChemin().get(0).getVille1().getID());
 
+			
 			carte.repartirFourmis(colonie);
 			j++;
 		}
+			//System.out.println("Ville1: "+meilleurCycle.get(1).getVille1().getID());
+			//System.out.println("Ville1: "+meilleurCycle.get(1).getVille2().getID());
 
+//			System.out.println("ori: "+meilleurCycle.size());		
+			ArretesMC = (ArrayList<Arrete>)meilleurCycle.clone();
+	//		System.out.println("Ville1: "+ArretesMC.get(1).getVille1().getID());
+	//		System.out.println("Ville1: "+ArretesMC.get(1).getVille2().getID());
+			System.out.println("copy: "+ArretesMC.size());		
 
 		return meilleurCycle;
 	}
@@ -86,6 +97,20 @@ public class Algo extends Observable  {
 			return cycle1;
 		}
 	}
+	
+	
+	public ArrayList<Arrete> getArretesMC() {
+		return ArretesMC;
+	}
+
+	public Carte getCarte() {
+		return carte;
+	}
+	
+	public Colonie getColonie() {
+		return colonie;
+	}
+	
 	
 	public void update() {
 		this.setChanged();

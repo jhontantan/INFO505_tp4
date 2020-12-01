@@ -14,7 +14,6 @@ import javax.swing.plaf.nimbus.NimbusLookAndFeel;
 import tp4.Algo;
 
 public class Fenetre extends JFrame{
-	
 	private static final long serialVersionUID = 1L;
 
 

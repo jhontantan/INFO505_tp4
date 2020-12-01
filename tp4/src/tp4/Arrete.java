@@ -24,7 +24,7 @@ public class Arrete {
 	
 	public Arrete(Ville ville1, Ville ville2) {
 		this(ville1, ville2, 1);
-		//On initialise la qte de pheromone à 1 et non à 0, sinon on ne peut pas calculer la probabilite de passage à une autre ville
+		//On initialise la qte de pheromone ï¿½ 1 et non ï¿½ 0, sinon on ne peut pas calculer la probabilite de passage ï¿½ une autre ville
 	}
 	
 
@@ -56,6 +56,15 @@ public class Arrete {
 	
 	public void deposerPhe(double qte) {
 		qtePhe += qte;
+	}
+	
+	public int[][] getCoord(){
+		int coord[][] = new int[2][2];
+		coord[0][0] = ville1.getX();
+		coord[0][1] = ville1.getY();
+		coord[1][0] = ville2.getX();
+		coord[1][1] = ville2.getY();
+		return coord;
 	}
 	
   	public boolean equals(Object obj) {

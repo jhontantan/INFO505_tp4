@@ -17,23 +17,23 @@ import javax.swing.JPanel;
 
 import tp4.*;
 
+
 public class CenterPanel extends JPanel  implements Observer{
 	private static final long serialVersionUID = 1L;
-
-	private int padding = 20;
-    private int labelPadding = 12;
-	private Carte carte;
-    private static int pointWidth = 10;
+	
+	private Algo algo;
+    public  static int CHEMIN_PADDING = 5;
+    private static int pointWidth = 20;
     private static final Color GRAPH_COLOR = Color.blue;
     private static final Stroke GRAPH_STROKE = new BasicStroke(3f);
-
+    
+    private Color lineColor = new Color(0, 0, 255);
     private Color pointColor = new Color(255,0,0 );
-	private Colonie colonie;
 
 
 	public CenterPanel(Algo algo) {
-		colonie = algo.getColonie();
-		carte = algo.getCarte();
+	     this.algo  = algo;
+	     algo.addObserver(this);
         setBackground(Color.WHITE);
     }
 
@@ -42,6 +42,8 @@ public class CenterPanel extends JPanel  implements Observer{
     //Afiche contenu
     @Override
     protected void paintComponent(Graphics g) {
+		Colonie colonie = algo.getColonie();
+		Carte carte = algo.getCarte();
     	super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
@@ -56,109 +58,19 @@ public class CenterPanel extends JPanel  implements Observer{
         }
         
 
-        
-        
-        
-   	 		//List<Point> graphPointsArrete = new ArrayList<>();
-   	 		//for (int i = 0; colonie.getNombreFourmi() < 1; i++) {
-    		//System.out.println(colonie.getFourmi(49).getChemin().size());
-    		//System.out.println(colonie.getFourmi(1).getChemin());
-
-    	//	System.out.println(lsColonie.get(1).getFourmi(499).getChemin().get(1).);
-
-        //	Fourmi fourmiCourante = colonie.getFourmi(i);
-        	//Arrete arreteCourante = fourmiCourante.getChemin().get(0);
-        	//Ville villeCourante1 = arreteCourante.getVille1();
-        	//System.out.println(villeCourante1.getX());
-
-		//	for (int j = 0; j < arreteCourante.size(); j++) {
-				//Ville villeCourante = arreteCourante;
-
-			//}
-        	
-			
-
-        	//arreteCourante.
-			//System.out.println(" fourmi"+fourmiCourante.);
-
-			//System.out.println(" chemain "+fourmiCourante.getChemin().size());
-
-        	
-          //  int x1 =  (lsColonie.ge);
-            //int y1 = (carte.getVilles().get(i).getY());
-
-            //graphPoints.add(new Point(x1, y1));
-      //  }
-         
         Stroke oldStroke = g2.getStroke();
-       /*
-        g2.setColor(GRAPH_COLOR);
-        g2.setStroke(GRAPH_STROKE);
-        for (int i = 0; i < graphPoints.size() - 1; i++) {
-           int x1 = graphPoints.get(i).x;
-           int y1 = graphPoints.get(i).y;
-           int x2 = graphPoints.get(i + 1).x;
-           int y2 = graphPoints.get(i + 1).y;
-           g2.drawLine(x1*5, y1*5, x2, y2);         
-        }
-*/
-        g2.setStroke(oldStroke);
-        g2.setColor(pointColor);
-        for (int i = 0; i < graphPoints.size(); i++) {
-            int x = graphPoints.get(i).x - pointWidth / 2;
-            int y = graphPoints.get(i).y - pointWidth / 2;
-            int ovalW = pointWidth;
-            int ovalH = pointWidth;
-            g2.fillOval(x*5, y*5, ovalW, ovalH);
-        }	
-    }
-    
-    @Override
-    public void update(Observable o, Object arg) {
-      this.repaint();
-    }
-
-   
-    /*
-        super.paintComponent(g);
-        Graphics2D g2 = (Graphics2D) g;
-        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-
-        double xScale = ((double) getWidth() - (3 * padding) - labelPadding) / (scores.size() - 1);
-        double yScale = ((double) getHeight() - 2 * padding - labelPadding) / (getMaxScore() - getMinScore());
-
-        List<Ville> graphPoints = new ArrayList<>();
-        for (int i = 0; i < scores.size(); i++) {
-            int x1 = (int) (i * xScale + padding + labelPadding);
-            int y1 = (int) ((getMaxScore() - ville.get(i)) * yScale + padding);
-            graphPoints.add(new Point(x1, y1));
-        }
-
-        g2.setColor(Color.WHITE);
-	    //fill the rect
-        g2.fillRect(padding + labelPadding, padding, getWidth() - (2 * padding) - 
-        		labelPadding, getHeight() - 2 * padding - labelPadding);
-        g2.setColor(Color.BLUE);
-
-        
-
-        }
-
-   
-        g2.drawLine(padding + labelPadding, getHeight() - padding - labelPadding, padding + labelPadding, padding);
-        g2.drawLine(padding + labelPadding, getHeight() - padding - labelPadding, getWidth() -
-        		padding, getHeight() - padding - labelPadding);
-
-        Stroke oldStroke = g2.getStroke();
-        g2.setColor(lineColor);
-        g2.setStroke(GRAPH_STROKE);
-        for (int i = 0; i < graphPoints.size() - 1; i++) {
-            int x1 = graphPoints.get(i).x;
-            int y1 = graphPoints.get(i).y;
-            int x2 = graphPoints.get(i + 1).x;
-            int y2 = graphPoints.get(i + 1).y;
-            g2.drawLine(x1, y1, x2, y2);
-        }
+   	 			
+   	        g2.setColor(lineColor);
+   	        g2.setStroke(GRAPH_STROKE);
+   	        for (int i = 0; i < algo.getArretesMC().size(); i++) {
+   	        	int coord[][] = algo.getArretesMC().get(i).getCoord();
+   	        	g2.drawLine(coord[0][0]+pointWidth/2,
+   	     	 		coord[0][1]+pointWidth/2,
+   	     	 		coord[1][0]+pointWidth/2,
+   	     	 		coord[1][1]+pointWidth/2);
+   	        	System.out.println(" chemain "+coord[0][0]);
+   	        }
+  
 
         g2.setStroke(oldStroke);
         g2.setColor(pointColor);
@@ -168,8 +80,11 @@ public class CenterPanel extends JPanel  implements Observer{
             int ovalW = pointWidth;
             int ovalH = pointWidth;
             g2.fillOval(x, y, ovalW, ovalH);
-        }
-    } */
+        }	
+    }
     
-
+    @Override
+    public void update(Observable o, Object arg) {
+      this.repaint();
+    }
 }

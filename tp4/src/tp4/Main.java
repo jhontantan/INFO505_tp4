@@ -25,18 +25,15 @@ public class Main extends JPanel{
 		double c = 0.7;
 		int q = 1;
 		int nombreVille = 15;
-		int nombreFourmi = 1;
+		int nombreFourmi = 3;
 		int nombreCycle = 1;
-		Carte carte;
-		Colonie colonie;
 		
 		long start = System.currentTimeMillis();
 		Algo algo = new Algo(q, c, a, b, nombreVille, nombreFourmi, nombreCycle);
+		//System.out.println(Carte.calculerDistanceChemin(algo.algoFourmi()));
 		duree = System.currentTimeMillis() - start;
-		System.out.println(duree);
 
 		new Fenetre(algo);
-		System.out.println(Carte.calculerDistanceChemin(algo.algoFourmi()));
 		
 		
 	}
