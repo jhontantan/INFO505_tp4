@@ -4,7 +4,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 
-public class RightPanel extends JPanel {
+public class RightPanel extends JMenuBar {
+	
+    private static final long serialVersionUID = 1L;
+
 	JButton start = new JButton("Start");
 	JTextField Nbfourmi = new JTextField(4);
 	JTextField NbCycle = new JTextField(4);

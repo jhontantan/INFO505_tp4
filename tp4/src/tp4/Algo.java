@@ -15,6 +15,7 @@ public class Algo extends Observable  {
 	
 	private Carte carte;
 	private Colonie colonie;
+	private ArrayList<Colonie> cheminColonie;
 	
 
 	public Algo(int q, double c, int a, int b, int nombreVille, int nombreFourmi, int nombreCycle) {
@@ -53,12 +54,21 @@ public class Algo extends Observable  {
 				}
 			}
 			
+			//System.out.println(colonie.getNombreFourmi());
+
+			
+			
 			carte.evaporation();
 			carte.deposerPheromone(colonie);
+			
+			System.out.println("size "+colonie.getFourmi(0).getChemin().size());
+
 			meilleurCycle = garderMeilleurCycle(colonie.getMeilleurCycle(), meilleurCycle);
+
 			carte.repartirFourmis(colonie);
 			j++;
 		}
+
 
 		return meilleurCycle;
 	}

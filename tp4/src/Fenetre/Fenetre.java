@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 
 import javax.swing.JFrame;
+import javax.swing.JScrollPane;
 import javax.swing.WindowConstants;
 
 
@@ -28,7 +29,9 @@ public class Fenetre extends JFrame{
         setLayout(new BorderLayout());
 
        // add(new RightPanel(), BorderLayout.EAST);
-        add(new CenterPanel(algo), BorderLayout.CENTER);
+      //  add(new RightPanel(editor, this), BorderLayout.NORTH);
+        add(new JScrollPane(new CenterPanel(algo)), BorderLayout.CENTER);
+        add(new DownPanel(algo),BorderLayout.SOUTH );
     
         pack();
         setVisible(true);

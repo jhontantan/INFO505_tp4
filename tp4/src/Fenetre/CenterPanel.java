@@ -17,8 +17,9 @@ import javax.swing.JPanel;
 
 import tp4.*;
 
-@SuppressWarnings("serial")
-public class CenterPanel extends JPanel{
+public class CenterPanel extends JPanel  implements Observer{
+	private static final long serialVersionUID = 1L;
+
 	private int padding = 20;
     private int labelPadding = 12;
 	private Carte carte;
@@ -28,11 +29,7 @@ public class CenterPanel extends JPanel{
 
     private Color pointColor = new Color(255,0,0 );
 	private Colonie colonie;
-	//private ArrayList<Colonie> lsColonie;
 
-
-
-   // Jeu jeu = new Jeu();
 
 	public CenterPanel(Algo algo) {
 		colonie = algo.getColonie();
@@ -62,12 +59,14 @@ public class CenterPanel extends JPanel{
         
         
         
-   //::  List<Point> graphPointsArrete = new ArrayList<>();
-     //   for (int i = 0; i < 1; i++) {
-    	//	System.out.println(lsColonie.get(1).getFourmi(499));
+   	 		//List<Point> graphPointsArrete = new ArrayList<>();
+   	 		//for (int i = 0; colonie.getNombreFourmi() < 1; i++) {
+    		//System.out.println(colonie.getFourmi(49).getChemin().size());
+    		//System.out.println(colonie.getFourmi(1).getChemin());
+
     	//	System.out.println(lsColonie.get(1).getFourmi(499).getChemin().get(1).);
 
-        //	Fourmi fourmiCourante = lsColonie.get(1);
+        //	Fourmi fourmiCourante = colonie.getFourmi(i);
         	//Arrete arreteCourante = fourmiCourante.getChemin().get(0);
         	//Ville villeCourante1 = arreteCourante.getVille1();
         	//System.out.println(villeCourante1.getX());
@@ -113,6 +112,12 @@ public class CenterPanel extends JPanel{
             g2.fillOval(x*5, y*5, ovalW, ovalH);
         }	
     }
+    
+    @Override
+    public void update(Observable o, Object arg) {
+      this.repaint();
+    }
+
    
     /*
         super.paintComponent(g);
@@ -165,5 +170,6 @@ public class CenterPanel extends JPanel{
             g2.fillOval(x, y, ovalW, ovalH);
         }
     } */
+    
 
 }
