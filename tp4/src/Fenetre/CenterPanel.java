@@ -76,8 +76,8 @@ public class CenterPanel extends JPanel  implements Observer{
         g2.setStroke(oldStroke);
         g2.setColor(pointColor);
         for (int i = 0; i < graphPoints.size(); i++) {
-            int x = graphPoints.get(i).x - pointWidth / 2;
-            int y = graphPoints.get(i).y - pointWidth / 2;
+            int x = graphPoints.get(i).x ;
+            int y = graphPoints.get(i).y ;
             int ovalW = pointWidth;
             int ovalH = pointWidth;
             g2.fillOval(x, y, ovalW, ovalH);
