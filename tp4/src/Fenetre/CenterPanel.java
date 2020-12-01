@@ -16,7 +16,6 @@ import tp4.*;
 public class CenterPanel extends JPanel  implements Observer{
 	private static final long serialVersionUID = 1L;
 
-	private Algo algo;
     public  static int CHEMIN_PADDING = 5;
     private static int pointWidth =20;
     private static final Color GRAPH_COLOR = Color.blue;
@@ -25,22 +24,20 @@ public class CenterPanel extends JPanel  implements Observer{
     private Color lineColor = new Color(0, 0, 255);
     private Color pointColor = new Color(255,0,0 );
 
-    private ArrayList<Arrete> meilleurCycle;
+    private ArrayList<Arrete> chemin;
+    private Carte carte;
 
 
-	public CenterPanel(Algo algo) {
-	     this.algo  = algo;
-	     algo.addObserver(this);
+	public CenterPanel(ArrayList<Arrete> chemin, Carte carte) {
+		this.chemin = chemin;
+		this.carte = carte;
 	     setBackground(Color.WHITE);
-	     this.meilleurCycle = algo.algoFourmi();
     }
 
 
 
     //Afiche contenu
     public void paint(Graphics g) {
-		Colonie colonie = algo.getColonie();
-		Carte carte = algo.getCarte();
     	super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
@@ -59,8 +56,8 @@ public class CenterPanel extends JPanel  implements Observer{
  			
    	    g2.setColor(lineColor);
    	    g2.setStroke(GRAPH_STROKE);
-   	    for (int i = 0; i < meilleurCycle.size(); i++) {
-   	        int coord[][] = meilleurCycle.get(i).getCoord();
+   	    for (int i = 0; i < chemin.size(); i++) {
+   	        int coord[][] = chemin.get(i).getCoord();
    	        g2.drawLine(
    	        		coord[0][0]+pointWidth/2,
    	     	 		coord[0][1]+pointWidth/2,

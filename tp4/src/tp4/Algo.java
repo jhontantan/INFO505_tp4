@@ -16,6 +16,8 @@ public class Algo extends Observable  {
 	private int nombreFourmi;
 	private int nombreCycle;
     long duree;
+    
+    private final double indiceConvergence = 0.99;
 
 
 	 
@@ -44,12 +46,16 @@ public class Algo extends Observable  {
 
 
 	public ArrayList<Arrete> algoFourmi() { //Retourne le meilleur cycle
+		System.out.println("io,rg");
 		ArrayList<Arrete> meilleurCycle = new ArrayList<Arrete>();
+		ArrayList<Arrete> ancienMeilleurCycle = new ArrayList<Arrete>();
 		long start = System.currentTimeMillis();
 		carte.repartirFourmis(colonie); //Repartition aleatoire des fourmis sur la carte
 		int j = 0;
+		
 
-		while (/*!colonie.converge()*/ j < 1) {
+		while (!converge(ancienMeilleurCycle, meilleurCycle)) {
+			System.out.println(j);
 			for (int i = 0; i < colonie.getNombreFourmi(); i++) {
 				Fourmi fourmiCourante = colonie.getFourmi(i);
 				while (!fourmiCourante.cheminFini(nombreVille)) { //Si le cycle fourmi n'est pas termine
@@ -59,6 +65,7 @@ public class Algo extends Observable  {
 	
 			carte.evaporation();
 			carte.deposerPheromone(colonie);
+			ancienMeilleurCycle = meilleurCycle; 
 			meilleurCycle = garderMeilleurCycle(colonie.getMeilleurCycle(), meilleurCycle);
 	
 			carte.repartirFourmis(colonie);
@@ -67,6 +74,21 @@ public class Algo extends Observable  {
 		duree = System.currentTimeMillis() - start;
 		
 		return meilleurCycle;
+	}
+	
+	private boolean converge(ArrayList<Arrete> ancienMeilleurCycle, ArrayList<Arrete> meilleurCycle) {
+		if(ancienMeilleurCycle.size() != 0) {
+			double ancienDist = Carte.calculerDistanceChemin(ancienMeilleurCycle);
+			double dist = Carte.calculerDistanceChemin(meilleurCycle);
+			
+			if(ancienDist/dist <= 1 && ancienDist/dist > indiceConvergence) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+		
+		return false;
 	}
 
 	private ArrayList<Arrete> garderMeilleurCycle(ArrayList<Arrete> cycle1, ArrayList<Arrete> cycle2){
