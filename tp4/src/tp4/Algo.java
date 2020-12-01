@@ -39,7 +39,7 @@ public class Algo extends Observable  {
 	}
 	
 	public Algo() {
-		this(1,0.7,1,1,40,20,1);
+		this(1,0.7,1,1,10,1000,1);
 	}
 
 
@@ -47,7 +47,6 @@ public class Algo extends Observable  {
 		ArrayList<Arrete> meilleurCycle = new ArrayList<Arrete>();
 		long start = System.currentTimeMillis();
 		carte.repartirFourmis(colonie); //Repartition aleatoire des fourmis sur la carte
-		//ATTENTION reinitialiser le chemin des fourmis
 		int j = 0;
 
 		while (/*!colonie.converge()*/ j < 1) {

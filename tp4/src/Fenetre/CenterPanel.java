@@ -4,7 +4,6 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Point;
 import java.awt.RenderingHints;
 import java.awt.Stroke;
 import java.util.*;
@@ -25,12 +24,15 @@ public class CenterPanel extends JPanel  implements Observer{
     
     private Color lineColor = new Color(0, 0, 255);
     private Color pointColor = new Color(255,0,0 );
+    
+    private ArrayList<Arrete> meilleurCycle;
 
 
 	public CenterPanel(Algo algo) {
 	     this.algo  = algo;
 	     algo.addObserver(this);
-        setBackground(Color.WHITE);
+	     setBackground(Color.WHITE);
+	     this.meilleurCycle = algo.algoFourmi();
     }
 
 	
@@ -48,7 +50,7 @@ public class CenterPanel extends JPanel  implements Observer{
         List<Point> graphPoints = new ArrayList<>();
         for (int i = 0; i < carte.getVilles().size(); i++) {
             int x1 =  (carte.getVilles().get(i).getX());
-            int y1 = (carte.getVilles().get(i).getY());
+            int y1 = (carte.getVilles().get(i).getY()); 
 
             graphPoints.add(new Point(x1, y1));
         }
@@ -64,19 +66,18 @@ public class CenterPanel extends JPanel  implements Observer{
             int ovalH = pointWidth;
             g2.fillOval(x, y, ovalW, ovalH);
         }	
-		ArrayList<Arrete> meilleurCycle = new ArrayList<Arrete>();
-		meilleurCycle = algo.algoFourmi();
 
    	 			
-   	        g2.setColor(lineColor);
-   	        g2.setStroke(GRAPH_STROKE);
-   	        for (int i = 0; i < meilleurCycle.size(); i++) {
-   	        	int coord[][] = meilleurCycle.get(i).getCoord();
-   	        	g2.drawLine(coord[0][0]+pointWidth/2,
-   	     	 		coord[0][1]+pointWidth/2,
-   	     	 		coord[1][0]+pointWidth/2,
-   	     	 		coord[1][1]+pointWidth/2);
-   	        }
+        g2.setColor(lineColor);
+        g2.setStroke(GRAPH_STROKE);
+        for (int i = 0; i < meilleurCycle.size(); i++) {
+        	System.out.println(meilleurCycle.get(i));
+        	int coord[][] = meilleurCycle.get(i).getCoord();
+        	g2.drawLine(coord[0][0]+pointWidth/2,
+     	 		coord[0][1]+pointWidth/2,
+     	 		coord[1][0]+pointWidth/2,
+     	 		coord[1][1]+pointWidth/2);
+        }
   
 
        
