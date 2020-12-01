@@ -1,5 +1,6 @@
 package tp4;
 
+
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.util.ArrayList;
@@ -19,13 +20,7 @@ public class Main extends JPanel{
 
 
 	public static void main(String[] args) {
-		/*
-		SwingUtilities.invokeLater(new Runnable() {
-	         public void run() {
-	            Fenetre();
-	         }
-	      });
-	     */
+
 		int a = 1;
 		int b = 1;
 		double c = 0.7;
@@ -33,35 +28,15 @@ public class Main extends JPanel{
 		int nombreVille = 15;
 		int nombreFourmi = 50;
 		int nombreCycle = 1;
+		Carte carte;
+		Colonie colonie;
 		
 		Algo algo = new Algo(q, c, a, b, nombreVille, nombreFourmi, nombreCycle);
+		
+		new Fenetre(algo);
 		System.out.println(Carte.calculerDistanceChemin(algo.algoFourmi()));
+		
+		
 	}
 
-/*
-	private static void Fenetre()  {
-    	JFrame frame = new JFrame("INFO505");
-
-    //	UIManager.setLookAndFeel(new NimbusLookAndFeel());
-       // setTitle("INFO504"); 
-    	frame.setMinimumSize(new Dimension(800, 800));
-        frame.setLocationRelativeTo(null);
-
-        //Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-        //frame.setLocation(dim.width / 2 - getWidth() / 2, dim.height / 2 - getHeight() / 2);
-        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-
-        frame.setLayout(new BorderLayout());
-
-       // add(new RightPanel(), BorderLayout.EAST);
-        frame.add(new CenterPanel(carte), BorderLayout.CENTER);
-    
-        frame.pack();
-        frame.setVisible(true);
-    }
-
-	public static ArrayList<Colonie> getLsColonie() {
-		return lsColonie;
-	}
-*/
 }

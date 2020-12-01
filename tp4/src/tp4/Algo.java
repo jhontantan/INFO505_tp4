@@ -1,8 +1,9 @@
 package tp4;
 
 import java.util.ArrayList;
+import java.util.Observable;
 
-public class Algo {
+public class Algo extends Observable  {
 	
 	private int q;
 	private double c;
@@ -74,6 +75,11 @@ public class Algo {
 		} else {
 			return cycle1;
 		}
+	}
+	
+	public void update() {
+		this.setChanged();
+		this.notifyObservers();
 	}
 	
 }

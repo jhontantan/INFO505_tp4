@@ -15,12 +15,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import tp4.Arrete;
-import tp4.Carte;
-import tp4.Colonie;
-import tp4.Fourmi;
-import tp4.Main;
-import tp4.Ville;
+import tp4.*;
 
 @SuppressWarnings("serial")
 public class CenterPanel extends JPanel{
@@ -33,17 +28,16 @@ public class CenterPanel extends JPanel{
 
     private Color pointColor = new Color(255,0,0 );
 	private Colonie colonie;
-	private ArrayList<Colonie> lsColonie;
+	//private ArrayList<Colonie> lsColonie;
 
 
 
    // Jeu jeu = new Jeu();
 
-	public CenterPanel(Carte carte) {
-		this.lsColonie = Main.getLsColonie();
-		this.carte=carte;
+	public CenterPanel(Algo algo) {
+		colonie = algo.getColonie();
+		carte = algo.getCarte();
         setBackground(Color.WHITE);
-        
     }
 
 	
