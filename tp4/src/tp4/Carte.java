@@ -69,7 +69,6 @@ public class Carte {
 				}
 			}
 		}
-		System.out.println(arreteNotUsed + " " + villeDepart);
 			
 		for (int i = 0; i < arretes.size(); i++) {//Supression des arrete qui ne contiennent pas la ville sur laquelle est actuelement la fourmi (elle ne peut pas se teleporter)
 			if (!arretes.get(i).contient(villeDepart)) {
