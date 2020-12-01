@@ -39,7 +39,7 @@ public class Algo extends Observable  {
 	}
 	
 	public Algo() {
-		this(1,0.7,1,1,40,20,1);
+		this(1,0.7,1,1,10,10,1);
 	}
 
 
@@ -92,17 +92,6 @@ public class Algo extends Observable  {
 		return colonie;
 	}
 	
-	public void setCarte(Carte carte) {
-		this.carte = carte;
-		update();
-	}
-
-	public void setColonie(Colonie colonie) {
-		this.colonie = colonie;
-		update();
-
-	}
-	
 	public long getDuree() {
 
 		return duree;
@@ -112,6 +101,15 @@ public class Algo extends Observable  {
 		this.setChanged();
 		this.notifyObservers();
 	}
+
+	public void setNombreVille(int nombreVille) {
+		this.nombreVille = nombreVille;
+	}
+
+	public void setNombreFourmi(int nombreFourmi) {
+		this.nombreFourmi = nombreFourmi;
+	}
+	
 	
 
 	
