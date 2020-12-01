@@ -29,7 +29,7 @@ public class Fenetre extends JFrame{
 
         setLayout(new BorderLayout());
 
-       // add(new MenuBar(algo), BorderLayout.NORTH);
+        add(new MenuBar(), BorderLayout.NORTH);
         add(new DownPanel(algo),BorderLayout.SOUTH );
         add(new JScrollPane(new CenterPanel(algo)), BorderLayout.CENTER);
     
