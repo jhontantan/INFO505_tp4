@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
+import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.WindowConstants;
 
 import Fenetre.*;
@@ -17,7 +18,7 @@ import Fenetre.*;
 public class Main extends JPanel{
 	
 	public static long duree;
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception {
 		
 		int a = 1;
 		int b = 1;

@@ -6,8 +6,10 @@ import java.awt.Toolkit;
 
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.WindowConstants;
-
+import javax.swing.plaf.nimbus.NimbusLookAndFeel;
 
 import tp4.Algo;
 
@@ -16,9 +18,9 @@ public class Fenetre extends JFrame{
 	private static final long serialVersionUID = 1L;
 
 
-	public Fenetre(Algo algo)  {
+	public Fenetre(Algo algo) throws UnsupportedLookAndFeelException  {
 
-    //	UIManager.setLookAndFeel(new NimbusLookAndFeel());
+    	UIManager.setLookAndFeel(new NimbusLookAndFeel());
         setTitle("INFO504"); 
     	setMinimumSize(new Dimension(800, 800));
 
@@ -29,7 +31,7 @@ public class Fenetre extends JFrame{
         setLayout(new BorderLayout());
 
        // add(new RightPanel(), BorderLayout.EAST);
-      //  add(new RightPanel(editor, this), BorderLayout.NORTH);
+        add(new MenuBar(), BorderLayout.NORTH);
         add(new JScrollPane(new CenterPanel(algo)), BorderLayout.CENTER);
         add(new DownPanel(algo),BorderLayout.SOUTH );
     
