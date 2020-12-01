@@ -17,7 +17,7 @@ public class Algo extends Observable  {
 	private int nombreCycle;
     long duree;
     
-    private final double indiceConvergence = 0.99;
+    private final double indiceConvergence = 0.9999;
 
 
 	 
@@ -46,7 +46,6 @@ public class Algo extends Observable  {
 
 
 	public ArrayList<Arrete> algoFourmi() { //Retourne le meilleur cycle
-		System.out.println("io,rg");
 		ArrayList<Arrete> meilleurCycle = new ArrayList<Arrete>();
 		ArrayList<Arrete> ancienMeilleurCycle = new ArrayList<Arrete>();
 		long start = System.currentTimeMillis();
@@ -55,7 +54,6 @@ public class Algo extends Observable  {
 		
 
 		while (!converge(ancienMeilleurCycle, meilleurCycle)) {
-			System.out.println(j);
 			for (int i = 0; i < colonie.getNombreFourmi(); i++) {
 				Fourmi fourmiCourante = colonie.getFourmi(i);
 				while (!fourmiCourante.cheminFini(nombreVille)) { //Si le cycle fourmi n'est pas termine
