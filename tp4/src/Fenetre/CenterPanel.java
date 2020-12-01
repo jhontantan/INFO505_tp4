@@ -25,34 +25,27 @@ public class CenterPanel extends JPanel  implements Observer{
     
     private Color lineColor = new Color(0, 0, 255);
     private Color pointColor = new Color(255,0,0 );
+    
+    ArrayList<Arrete> meilleurCycle ;
 
 
 	public CenterPanel(Algo algo) {
 	     this.algo  = algo;
 	     algo.addObserver(this);
-        setBackground(Color.WHITE);
+         setBackground(Color.WHITE);
+         this.meilleurCycle = algo.algoFourmi();
     }
 
 	
  	
     //Afiche contenu
-    @Override
-    protected void paintComponent(Graphics g) {
+    public void paint(Graphics g) {
 		Colonie colonie = algo.getColonie();
 		Carte carte = algo.getCarte();
     	super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        
-        /*
-        List<Point> graphPoints = new ArrayList<>();
-        for (int i = 0; i < carte.getVilles().size(); i++) {
-            int x1 =  (carte.getVilles().get(i).getX());
-            int y1 = (carte.getVilles().get(i).getY());
 
-            graphPoints.add(new Point(x1, y1));
-        }
-        */
         Stroke oldStroke = g2.getStroke();
 
         g2.setStroke(oldStroke);
@@ -64,22 +57,17 @@ public class CenterPanel extends JPanel  implements Observer{
             int ovalH = pointWidth;
             g2.fillOval(x, y, ovalW, ovalH);
         }	
-		ArrayList<Arrete> meilleurCycle = new ArrayList<Arrete>();
-		meilleurCycle = algo.algoFourmi();
-
-   	 			
-   	        g2.setColor(lineColor);
-   	        g2.setStroke(GRAPH_STROKE);
-   	        for (int i = 0; i < meilleurCycle.size(); i++) {
-   	        	int coord[][] = meilleurCycle.get(i).getCoord();
-   	        	g2.drawLine(coord[0][0]+pointWidth/2,
+ 			
+   	    g2.setColor(lineColor);
+   	    g2.setStroke(GRAPH_STROKE);
+   	    for (int i = 0; i < meilleurCycle.size(); i++) {
+   	        int coord[][] = meilleurCycle.get(i).getCoord();
+   	        g2.drawLine(
+   	        		coord[0][0]+pointWidth/2,
    	     	 		coord[0][1]+pointWidth/2,
    	     	 		coord[1][0]+pointWidth/2,
    	     	 		coord[1][1]+pointWidth/2);
-   	        }
-  
-
-       
+   	        }   
     }
     
     @Override
