@@ -23,7 +23,7 @@ public class CenterPanel extends JPanel  implements Observer{
 	
 	private Algo algo;
     public  static int CHEMIN_PADDING = 5;
-    private static int pointWidth = 20;
+    private static int pointWidth =20;
     private static final Color GRAPH_COLOR = Color.blue;
     private static final Stroke GRAPH_STROKE = new BasicStroke(3f);
     
@@ -70,7 +70,6 @@ public class CenterPanel extends JPanel  implements Observer{
    	     	 		coord[0][1]+pointWidth/2,
    	     	 		coord[1][0]+pointWidth/2,
    	     	 		coord[1][1]+pointWidth/2);
-   	        	System.out.println(" chemain "+coord[0][0]);
    	        }
   
 
