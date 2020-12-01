@@ -60,13 +60,13 @@ public class Carte {
 		return villes;
 	}
 
-	public Arrete getRandomArreteNotIn(Ville villeDepart, ArrayList<Arrete> arreteAlreadyUsed){
-		
+	public Arrete getRandomArreteNotIn(Ville villeDepart, ArrayList<Ville> villesAlreadyUsed){
 		ArrayList<Arrete> arreteNotUsed = new ArrayList<Arrete>(arretes);
+		System.out.println(arretes.size());
 		
 		for (int i = 0; i < arretes.size(); i++) {//Supression des arretes deja utilisees
-			if(arreteAlreadyUsed != null) {
-				if(arreteAlreadyUsed.contains(arretes.get(i))) {
+			if(villesAlreadyUsed != null) {
+				if(contientVille(arretes.get(i), villesAlreadyUsed)) {
 					arreteNotUsed.remove(arretes.get(i));
 				}
 			}
@@ -78,9 +78,18 @@ public class Carte {
 			}
 		}
 		
-		
 		return getArreteSuivanteParProba(arreteNotUsed);
 
+	}
+	
+	private boolean contientVille(Arrete arr, ArrayList<Ville> villes) {
+		for (int i = 0; i < villes.size(); i++) {
+			if(arr.contient(villes.get(i))) {
+				System.out.println(arr + "   "+ villes.get(i));
+				return true;
+			}
+		}
+		return false;
 	}
 	
 	private Arrete getArreteSuivanteParProba(ArrayList<Arrete> arreteNotUsed) {

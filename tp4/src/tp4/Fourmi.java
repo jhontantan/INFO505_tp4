@@ -28,7 +28,7 @@ public class Fourmi {
 
 
 	public void villeSuivante(Carte carte) { //La fourmi passe a la ville suivante
-		Arrete randomArrete = carte.getRandomArreteNotIn(villeCourante, chemin);
+		Arrete randomArrete = carte.getRandomArreteNotIn(villeCourante, cheminToVilles(chemin));
 		chemin.add(randomArrete); 
 		
 		if(randomArrete.getVille1().equals(villeCourante)) { //On actualise la ville courante
@@ -36,6 +36,24 @@ public class Fourmi {
 		} else {
 			villeCourante = randomArrete.getVille1();
 		}
+	}
+	
+	private ArrayList<Ville> cheminToVilles(ArrayList<Arrete> chemin){
+		ArrayList<Ville> villes = new ArrayList<Ville>();
+		Arrete arr;
+		for (int i = 0; i < chemin.size(); i++) {
+			arr = chemin.get(i);
+			if(!arr.contient(villeCourante)) {
+				if(!villes.contains(arr.getVille1())) {
+					villes.add(arr.getVille1());
+				}
+				if(!villes.contains(arr.getVille2())) {
+					villes.add(arr.getVille2());
+				}
+			}
+
+		}
+		return villes;
 	}
 
 }

@@ -37,19 +37,10 @@ public class Algo extends Observable  {
 	}
 	
 	public Algo() {
-		 a = 1;
-		 b = 1;
-		 c = 0.7;
-		 q = 1;
-		 nombreVille = 15;
-		 nombreFourmi = 1;
-		 nombreCycle = 1;
-		 
-		 carte = new Carte(nombreVille, a, b, q, c); //Generation de la carte (placement aleatoire des villes)
-		 colonie = new Colonie(nombreFourmi); //Initialisation des fourmis		
+		this(1,0.7,1,1,15,100,10);
 	}
 
-	
+
 	public ArrayList<Arrete> algoFourmi() { //Retourne le meilleur cycle
 		ArrayList<Arrete> meilleurCycle = new ArrayList<Arrete>();
 		long start = System.currentTimeMillis();
@@ -57,7 +48,7 @@ public class Algo extends Observable  {
 		//ATTENTION reinitialiser le chemin des fourmis
 		int j = 0;
 
-		while (/*!colonie.converge()*/ j < 100) {
+		while (/*!colonie.converge()*/ j < 1) {
 			for (int i = 0; i < colonie.getNombreFourmi(); i++) {
 				Fourmi fourmiCourante = colonie.getFourmi(i);
 				while (!fourmiCourante.cheminFini(nombreVille)) { //Si le cycle fourmi n'est pas termine

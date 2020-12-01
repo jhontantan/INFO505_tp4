@@ -43,7 +43,7 @@ public class Ville {
   	
   	@Override
 	public String toString() {
-		return "Ville [x=" + x + ", y=" + y + ", id=" + id + "]";
+		return "Ville "+ id;
 	}
 
   }
