@@ -17,6 +17,7 @@ public class DownPanel extends JPanel implements Observer {
 
 	private Algo algo;
 	private Carte carte;
+	private long tempsDuree;
 	
 	public DownPanel(Algo algo) {
 		this.algo = algo;
@@ -26,11 +27,11 @@ public class DownPanel extends JPanel implements Observer {
 	}
 	
 	public void afficheText() {
-		//		String res = "Le chemin optimale fait : " + Integer.toString(Main.distanceParcours);
-		String duree = "		Temps Execution:"+Main.duree;
+	
+	
 		String res = "Le chemin optimale fait : " + Double.toString(carte.calculerDistanceChemin(algo.algoFourmi())) ;
+		String duree = "		Temps Execution:"+ algo.getDuree()+"ms";
 		Label label = new Label(res+duree);
-		//label.setFont(new Font("TimesRoman", Font.BOLD, 25));
 		add(label);
 	}
 

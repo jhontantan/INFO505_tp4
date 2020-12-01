@@ -5,14 +5,6 @@ import java.util.Observable;
 
 public class Algo extends Observable  {
 	
-	/*
-	int a = 1;
-	int b = 1;
-	double c = 0.7;
-	int q = 1;
-	int nombreVille = 15;
-	int nombreFourmi = 1;
-	int nombreCycle = 1;*/
 	
 	private int q;
 	private double c;
@@ -21,6 +13,8 @@ public class Algo extends Observable  {
 	private int nombreVille;
 	private int nombreFourmi;
 	private int nombreCycle;
+    long duree;
+
 
 	 
 	private Carte carte;
@@ -41,11 +35,24 @@ public class Algo extends Observable  {
 		colonie = new Colonie(nombreFourmi); //Initialisation des fourmis
 
 	}
+	
+	public Algo() {
+		 a = 1;
+		 b = 1;
+		 c = 0.7;
+		 q = 1;
+		 nombreVille = 15;
+		 nombreFourmi = 1;
+		 nombreCycle = 1;
+		 
+		 carte = new Carte(nombreVille, a, b, q, c); //Generation de la carte (placement aleatoire des villes)
+		 colonie = new Colonie(nombreFourmi); //Initialisation des fourmis		
+	}
 
 	
 	public ArrayList<Arrete> algoFourmi() { //Retourne le meilleur cycle
 		ArrayList<Arrete> meilleurCycle = new ArrayList<Arrete>();
-
+		long start = System.currentTimeMillis();
 		carte.repartirFourmis(colonie); //Repartition aleatoire des fourmis sur la carte
 		//ATTENTION reinitialiser le chemin des fourmis
 		int j = 0;
@@ -66,10 +73,10 @@ public class Algo extends Observable  {
 			carte.repartirFourmis(colonie);
 			j++;
 		}
-		
+		duree = System.currentTimeMillis() - start;
 		return meilleurCycle;
 	}
-	
+
 	private ArrayList<Arrete> garderMeilleurCycle(ArrayList<Arrete> cycle1, ArrayList<Arrete> cycle2){
 		double dist1 = Carte.calculerDistanceChemin(cycle1);
 		double dist2 = Carte.calculerDistanceChemin(cycle2);
@@ -92,10 +99,16 @@ public class Algo extends Observable  {
 		return colonie;
 	}
 	
+	public long getDuree() {
+
+		return duree;
+	}
 	
 	public void update() {
 		this.setChanged();
 		this.notifyObservers();
 	}
+	
+
 	
 }

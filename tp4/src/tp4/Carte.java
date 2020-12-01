@@ -3,8 +3,8 @@ package tp4;
 import java.util.ArrayList;
 
 public class Carte {
-	public final static int LARGEUR = 600;
-	public final static int HAUTEUR = 600;
+	public final static int LARGEUR = 700;
+	public final static int HAUTEUR = 700;
 
 	private int nombreVille;
 	private int a;
