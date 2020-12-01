@@ -20,7 +20,7 @@ public class Fenetre extends JFrame{
 	public Fenetre(Algo algo) throws UnsupportedLookAndFeelException  {
 
     	UIManager.setLookAndFeel(new NimbusLookAndFeel());
-        setTitle("INFO504"); 
+        setTitle("INFO505"); 
     	setMinimumSize(new Dimension(800, 800));
 
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
@@ -29,7 +29,7 @@ public class Fenetre extends JFrame{
 
         setLayout(new BorderLayout());
 
-        add(new MenuBar(), BorderLayout.NORTH);
+       // add(new MenuBar(algo), BorderLayout.NORTH);
         add(new DownPanel(algo),BorderLayout.SOUTH );
         add(new JScrollPane(new CenterPanel(algo)), BorderLayout.CENTER);
     

@@ -44,7 +44,7 @@ public class CenterPanel extends JPanel  implements Observer{
         Graphics2D g2 = (Graphics2D) g;
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         
-        
+        /*
         List<Point> graphPoints = new ArrayList<>();
         for (int i = 0; i < carte.getVilles().size(); i++) {
             int x1 =  (carte.getVilles().get(i).getX());
@@ -52,11 +52,21 @@ public class CenterPanel extends JPanel  implements Observer{
 
             graphPoints.add(new Point(x1, y1));
         }
-        
+        */
+        Stroke oldStroke = g2.getStroke();
+
+        g2.setStroke(oldStroke);
+        g2.setColor(pointColor);
+        for (int i = 0; i < carte.getVilles().size(); i++) {
+            int x = (carte.getVilles().get(i).getX());
+            int y = (carte.getVilles().get(i).getY()) ;
+            int ovalW = pointWidth;
+            int ovalH = pointWidth;
+            g2.fillOval(x, y, ovalW, ovalH);
+        }	
 		ArrayList<Arrete> meilleurCycle = new ArrayList<Arrete>();
 		meilleurCycle = algo.algoFourmi();
 
-        Stroke oldStroke = g2.getStroke();
    	 			
    	        g2.setColor(lineColor);
    	        g2.setStroke(GRAPH_STROKE);
@@ -69,15 +79,7 @@ public class CenterPanel extends JPanel  implements Observer{
    	        }
   
 
-        g2.setStroke(oldStroke);
-        g2.setColor(pointColor);
-        for (int i = 0; i < graphPoints.size(); i++) {
-            int x = graphPoints.get(i).x ;
-            int y = graphPoints.get(i).y ;
-            int ovalW = pointWidth;
-            int ovalH = pointWidth;
-            g2.fillOval(x, y, ovalW, ovalH);
-        }	
+       
     }
     
     @Override

@@ -3,6 +3,8 @@ package tp4;
 import java.util.ArrayList;
 import java.util.Observable;
 
+import javax.naming.directory.InvalidAttributeIdentifierException;
+
 public class Algo extends Observable  {
 	
 	
@@ -37,7 +39,7 @@ public class Algo extends Observable  {
 	}
 	
 	public Algo() {
-		this(1,0.7,1,1,15,100,10);
+		this(1,0.7,1,1,40,20,1);
 	}
 
 
@@ -58,13 +60,13 @@ public class Algo extends Observable  {
 	
 			carte.evaporation();
 			carte.deposerPheromone(colonie);
-			
 			meilleurCycle = garderMeilleurCycle(colonie.getMeilleurCycle(), meilleurCycle);
 	
 			carte.repartirFourmis(colonie);
 			j++;
 		}
 		duree = System.currentTimeMillis() - start;
+		
 		return meilleurCycle;
 	}
 
@@ -88,6 +90,17 @@ public class Algo extends Observable  {
 	
 	public Colonie getColonie() {
 		return colonie;
+	}
+	
+	public void setCarte(Carte carte) {
+		this.carte = carte;
+		update();
+	}
+
+	public void setColonie(Colonie colonie) {
+		this.colonie = colonie;
+		update();
+
 	}
 	
 	public long getDuree() {

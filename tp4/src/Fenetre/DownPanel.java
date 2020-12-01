@@ -23,7 +23,7 @@ public class DownPanel extends JPanel implements Observer {
 		this.algo = algo;
 		carte = algo.getCarte();
 		algo.addObserver(this);
-		afficheText();
+	//	afficheText();
 	}
 	
 	public void afficheText() {
@@ -37,7 +37,7 @@ public class DownPanel extends JPanel implements Observer {
 
 	@Override
 	public void update(Observable arg0, Object arg1) {
-		afficheText();
+		//afficheText();
 	}
 
 }

@@ -2,6 +2,7 @@ package Fenetre;
 
 import javax.swing.*;
 
+
 import tp4.*;
 
 import java.awt.event.ActionEvent;
@@ -11,13 +12,15 @@ import java.util.Observable;
 public class MenuBar extends JToolBar implements ActionListener{
 	
     private static final long serialVersionUID = 1L;
-
+    
+    Algo algo;
 	JButton start = new JButton("Start");
-	JTextField Nbfourmi = new JTextField("1",4);
-	JTextField NbCycle = new JTextField("1",4);
-	JTextField NbVille = new JTextField("15",4);
+	JTextField Nbfourmi = new JTextField(4);
+	JTextField NbCycle = new JTextField(4);
+	JTextField NbVille = new JTextField(4);
 
-    public MenuBar() {
+    public MenuBar(Algo algo) {
+    	
         
     	add(new JLabel(" Quantité fourmis : "));
         add(Nbfourmi);
@@ -32,11 +35,18 @@ public class MenuBar extends JToolBar implements ActionListener{
         add(new JLabel(""));
         addSeparator();
 
-        start.addActionListener(this);
+      //  start.addActionListener(this);
         add(start);    
     }
-    
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+    /*
     @Override
+  
     public void actionPerformed(ActionEvent e) {
         String action = e.getActionCommand();
         if (action.equals("Start")) {
@@ -46,27 +56,22 @@ public class MenuBar extends JToolBar implements ActionListener{
            int JfieldVille = Integer.parseInt(NbVille.getText());
            int JfieldFourmis = Integer.parseInt(Nbfourmi.getText());
            int JfieldCycles = Integer.parseInt(NbCycle.getText());
+           
+           
+           
 
 
-        	frame.dispose();
-        	
-        	int a = 1;
- 			int b = 1;
- 			double c = 0.7;
- 			int q = 1;
- 			int nombreVille = JfieldVille;
- 			int nombreFourmi = JfieldFourmis;
- 			int nombreCycle = JfieldCycles;
- 	        Algo algo = new Algo(q, c, a, b, nombreVille, nombreFourmi, nombreCycle);
+        
  	        
- 	        try {
-				 new Fenetre(algo);
-			} catch (UnsupportedLookAndFeelException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}			 
+ 	       		 
  	    }
+ 	    
  	   }
+ 	   */
+
+	
+	
+	
     
 
 }
