@@ -3,8 +3,8 @@ package tp4;
 import java.util.ArrayList;
 
 public class Carte {
-	public final static int LARGEUR = 100;
-	public final static int HAUTEUR = 100;
+	public final static int LARGEUR = 600;
+	public final static int HAUTEUR = 600;
 
 	private int nombreVille;
 	private int a;
@@ -116,7 +116,6 @@ public class Carte {
 		
 		return arreteNotUsed.get(i);
 	}
-	
 	
 	 //Retourne la proba que la fourmi courante se deplace sur la ville suivante en utilisant l'arrete passee en parametre
 	public double getProba(Arrete arrete, ArrayList<Arrete> arreteNotUsed) {

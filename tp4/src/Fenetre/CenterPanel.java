@@ -57,13 +57,15 @@ public class CenterPanel extends JPanel  implements Observer{
             graphPoints.add(new Point(x1, y1));
         }
         
+		ArrayList<Arrete> meilleurCycle = new ArrayList<Arrete>();
+		meilleurCycle = algo.algoFourmi();
 
         Stroke oldStroke = g2.getStroke();
    	 			
    	        g2.setColor(lineColor);
    	        g2.setStroke(GRAPH_STROKE);
-   	        for (int i = 0; i < algo.getArretesMC().size(); i++) {
-   	        	int coord[][] = algo.getArretesMC().get(i).getCoord();
+   	        for (int i = 0; i < meilleurCycle.size(); i++) {
+   	        	int coord[][] = meilleurCycle.get(i).getCoord();
    	        	g2.drawLine(coord[0][0]+pointWidth/2,
    	     	 		coord[0][1]+pointWidth/2,
    	     	 		coord[1][0]+pointWidth/2,
