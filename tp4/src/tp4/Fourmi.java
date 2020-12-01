@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public class Fourmi {
 	private ArrayList<Arrete> chemin; //Le chemin parcouru pas la fourmi
 	private Ville villeCourante; //La ville actuelle ou se situe la fourmi
+	private Ville villePrec; //La ville actuelle ou se situe la fourmi
 
 
 	public Fourmi() {
@@ -14,6 +15,7 @@ public class Fourmi {
 
 	public void auDepart(Ville v) {
 		villeCourante = v;
+		villePrec = null;
 		chemin = new ArrayList<Arrete>();
 	}
 	
@@ -28,9 +30,11 @@ public class Fourmi {
 
 
 	public void villeSuivante(Carte carte) { //La fourmi passe a la ville suivante
-		Arrete randomArrete = carte.getRandomArreteNotIn(villeCourante, cheminToVilles(chemin));
-		chemin.add(randomArrete); 
+		Arrete randomArrete = carte.getRandomArreteNotIn(villeCourante, villePrec, cheminToVilles(chemin));
 		
+		chemin.add(randomArrete); 
+		villePrec = villeCourante;
+
 		if(randomArrete.getVille1().equals(villeCourante)) { //On actualise la ville courante
 			villeCourante = randomArrete.getVille2();
 		} else {

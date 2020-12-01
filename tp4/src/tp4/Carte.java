@@ -60,10 +60,8 @@ public class Carte {
 		return villes;
 	}
 
-	public Arrete getRandomArreteNotIn(Ville villeDepart, ArrayList<Ville> villesAlreadyUsed){
-		ArrayList<Arrete> arreteNotUsed = new ArrayList<Arrete>(arretes);
-		System.out.println(arretes.size());
-		
+	public Arrete getRandomArreteNotIn(Ville villeDepart, Ville villePrec, ArrayList<Ville> villesAlreadyUsed){
+		ArrayList<Arrete> arreteNotUsed = new ArrayList<Arrete>(arretes);		
 		for (int i = 0; i < arretes.size(); i++) {//Supression des arretes deja utilisees
 			if(villesAlreadyUsed != null) {
 				if(contientVille(arretes.get(i), villesAlreadyUsed)) {
@@ -75,8 +73,13 @@ public class Carte {
 		for (int i = 0; i < arretes.size(); i++) {//Supression des arrete qui ne contiennent pas la ville sur laquelle est actuelement la fourmi (elle ne peut pas se teleporter)
 			if (!arretes.get(i).contient(villeDepart)) {
 				arreteNotUsed.remove(arretes.get(i));
-			}
+			} else if (villePrec != null) {
+				if(arretes.get(i).contient(villeDepart) && arretes.get(i).contient(villePrec)) {
+					arreteNotUsed.remove(arretes.get(i));
+				}
+			}			
 		}
+
 		
 		return getArreteSuivanteParProba(arreteNotUsed);
 
@@ -85,7 +88,6 @@ public class Carte {
 	private boolean contientVille(Arrete arr, ArrayList<Ville> villes) {
 		for (int i = 0; i < villes.size(); i++) {
 			if(arr.contient(villes.get(i))) {
-				System.out.println(arr + "   "+ villes.get(i));
 				return true;
 			}
 		}

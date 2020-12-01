@@ -82,6 +82,16 @@ public class Arrete {
   		}
   		return false;  		
   	}
+  	
+  	@Override 
+  	public String toString() {
+		return ville1.toString() + " - " + ville2.toString();
+  		
+  	}
+
+	public boolean contientVille(Arrete arr) {
+		return ville1.equals(arr.ville1) || ville1.equals(arr.ville2) || ville2.equals(arr.ville1) || ville2.equals(ville2);
+	}
 
 
 }
