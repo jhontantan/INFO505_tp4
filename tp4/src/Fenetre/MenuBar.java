@@ -65,12 +65,12 @@ public class MenuBar extends JToolBar implements ActionListener{
         	  	//int nombreCycle = JfieldCycles;
         	  	algo = new Algo(q, c, a, b, nombreVille, nombreFourmi, 1);
         	}
-        	try {
+        //	try {
 				new Fenetre(algo);
-        	}catch (UnsupportedLookAndFeelException e1) {
+       /* 	}catch (UnsupportedLookAndFeelException e1) {
  	    	  	// TODO Auto-generated catch block
 				e1.printStackTrace();
-        	}				 
+        	}	*/			 
         }
     }
 }

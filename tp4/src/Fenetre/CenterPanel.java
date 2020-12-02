@@ -5,8 +5,14 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
+import java.awt.Shape;
 import java.awt.Stroke;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.geom.Line2D;
 import java.util.*;
+import javax.swing.Timer;
+
 
 import javax.swing.JPanel;
 
@@ -16,6 +22,7 @@ import tp4.*;
 public class CenterPanel extends JPanel {
 	private static final long serialVersionUID = 1L;
 
+    private List<Shape> shapes;
     public  static int CHEMIN_PADDING = 5;
     private static int pointWidth =20;
     private static final Color GRAPH_COLOR = Color.blue;
@@ -26,23 +33,46 @@ public class CenterPanel extends JPanel {
 
     private ArrayList<Arrete> chemin;
     private Carte carte;
+    Line2D line;
+	private int y = 0;
+
 
 
 	public CenterPanel(ArrayList<Arrete> chemin, Carte carte) {
 		this.chemin = chemin;
 		this.carte = carte;
-	     setBackground(Color.WHITE);
+
+		shapes = new ArrayList<>(chemin.size());
+		
+		Timer timer = new Timer(500, new ActionListener() {
+         	public void actionPerformed(ActionEvent e) {
+                 if(y<chemin.size()) {
+
+         			int coord[][] = chemin.get(y).getCoord();
+         			line = new Line2D.Double(coord[0][0]+pointWidth/2, coord[0][1]+pointWidth/2, coord[1][0]+pointWidth/2, coord[1][1]+pointWidth/2);
+
+         			shapes.add(line);
+          			y++;
+                 }
+                 repaint();
+         }
+
+   	    });
+		timer.setInitialDelay(500);
+		timer.start();
     }
 
 
 
     //Afiche contenu
-    public void paint(Graphics g) {
+	@Override
+    protected void paintComponent(Graphics g) {
     	super.paintComponent(g);
-        Graphics2D g2 = (Graphics2D) g;
+        Graphics2D g2 = (Graphics2D) g.create();
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
         Stroke oldStroke = g2.getStroke();
+        
 
         g2.setStroke(oldStroke);
         g2.setColor(pointColor);
@@ -54,15 +84,17 @@ public class CenterPanel extends JPanel {
             g2.fillOval(x, y, ovalW, ovalH);
         }
  			
-   	    g2.setColor(lineColor);
    	    g2.setStroke(GRAPH_STROKE);
-   	    for (int i = 0; i < chemin.size(); i++) {
-   	        int coord[][] = chemin.get(i).getCoord();
-   	        g2.drawLine(
-   	        		coord[0][0]+pointWidth/2,
-   	     	 		coord[0][1]+pointWidth/2,
-   	     	 		coord[1][0]+pointWidth/2,
-   	     	 		coord[1][1]+pointWidth/2);
-   	        }
+   	    g2.setColor(lineColor);
+   	  
+   	    //draw lines
+   	    for (Shape line1 : shapes) {
+
+   	    	g2.draw(line1);
+   	    }
+
+   	    g2.dispose();
+  
     }
-}
+
+} 

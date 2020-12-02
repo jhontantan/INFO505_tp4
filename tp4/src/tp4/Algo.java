@@ -41,7 +41,7 @@ public class Algo extends Observable  {
 	}
 	
 	public Algo() {
-		this(1,0.7,1,1,10,1000,1);
+		this(1,0.7,1,1,9,40,1);
 	}
 
 

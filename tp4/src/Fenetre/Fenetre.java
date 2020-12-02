@@ -19,9 +19,9 @@ public class Fenetre extends JFrame{
 	private static final long serialVersionUID = 1L;
 
 
-	public Fenetre(Algo algo) throws UnsupportedLookAndFeelException  {
+	public Fenetre(Algo algo)  {
 
-    	UIManager.setLookAndFeel(new NimbusLookAndFeel());
+    	//UIManager.setLookAndFeel(new NimbusLookAndFeel());
         setTitle("INFO505"); 
     	setMinimumSize(new Dimension(800, 800));
 
