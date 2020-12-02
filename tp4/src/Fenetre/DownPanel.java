@@ -3,18 +3,13 @@ package Fenetre;
 
 import java.awt.Label;
 import java.util.ArrayList;
-import java.util.Observable;
-import java.util.Observer;
-
 import javax.swing.JPanel;
 
 
-import tp4.Algo;
 import tp4.Arrete;
 import tp4.Carte;
-import tp4.Main;
 
-public class DownPanel extends JPanel implements Observer {
+public class DownPanel extends JPanel  {
 	private static final long serialVersionUID = 1L;
 
 	private ArrayList<Arrete> chemin;
@@ -34,10 +29,4 @@ public class DownPanel extends JPanel implements Observer {
 		Label label = new Label(res+dureeTxt);
 		add(label);
 	}
-
-	@Override
-	public void update(Observable arg0, Object arg1) {
-		afficheText();
-	}
-
 }

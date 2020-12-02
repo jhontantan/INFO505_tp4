@@ -1,11 +1,9 @@
 package tp4;
 
 import java.util.ArrayList;
-import java.util.Observable;
 
-import javax.naming.directory.InvalidAttributeIdentifierException;
 
-public class Algo extends Observable  {
+public class Algo  {
 	
 	
 	private int q;
@@ -34,15 +32,15 @@ public class Algo extends Observable  {
 		this.nombreVille = nombreVille;
 		this.nombreFourmi = nombreFourmi;
 		this.nombreCycle = nombreCycle;
-		
+
 		carte = new Carte(nombreVille, a, b, q, c); //Generation de la carte (placement aleatoire des villes)
 		colonie = new Colonie(nombreFourmi); //Initialisation des fourmis
-
 	}
 	
 	public Algo() {
-		this(1,0.7,1,1,9,40,1);
+		this(1,0.7,1,1,10,500,1);
 	}
+	
 
 
 	public ArrayList<Arrete> algoFourmi() { //Retourne le meilleur cycle
@@ -116,10 +114,6 @@ public class Algo extends Observable  {
 		return duree;
 	}
 	
-	public void update() {
-		this.setChanged();
-		this.notifyObservers();
-	}
 
 	public void setNombreVille(int nombreVille) {
 		this.nombreVille = nombreVille;

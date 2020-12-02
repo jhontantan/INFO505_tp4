@@ -6,7 +6,6 @@ import tp4.*;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Observable;
 
 public class MenuBar extends JToolBar implements ActionListener{
 	
@@ -55,15 +54,13 @@ public class MenuBar extends JToolBar implements ActionListener{
         	  	//int JfieldCycles = Integer.parseInt(NbCycle.getText());
 
         	  	frame.dispose();
-        	
-        	  	int a = 1;
-        	  	int b = 1;
-        	  	double c = 0.7;
-        	  	int q = 1;
+
         	  	int nombreVille = JfieldVille;
         	  	int nombreFourmi = JfieldFourmis;
         	  	//int nombreCycle = JfieldCycles;
-        	  	algo = new Algo(q, c, a, b, nombreVille, nombreFourmi, 1);
+        	  	
+        	  	//q,c,a,b,nombreVille,nombreFourmi,NombrebCycle
+        	  	algo = new Algo(1, 0.7, 1, 1, nombreVille, nombreFourmi, 1);
         	}
         //	try {
 				new Fenetre(algo);

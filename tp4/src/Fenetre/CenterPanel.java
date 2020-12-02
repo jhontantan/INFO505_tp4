@@ -25,7 +25,6 @@ public class CenterPanel extends JPanel {
     private List<Shape> shapes;
     public  static int CHEMIN_PADDING = 5;
     private static int pointWidth =20;
-    private static final Color GRAPH_COLOR = Color.blue;
     private static final Stroke GRAPH_STROKE = new BasicStroke(3f);
 
     private Color lineColor = new Color(0, 0, 255);
@@ -34,7 +33,7 @@ public class CenterPanel extends JPanel {
     private ArrayList<Arrete> chemin;
     private Carte carte;
     Line2D line;
-	private int y = 0;
+	private int y = -2;
 
 
 
@@ -44,21 +43,22 @@ public class CenterPanel extends JPanel {
 
 		shapes = new ArrayList<>(chemin.size());
 		
-		Timer timer = new Timer(500, new ActionListener() {
+		Timer timer = new Timer(200, new ActionListener() {
          	public void actionPerformed(ActionEvent e) {
-                 if(y<chemin.size()) {
+                 if(y<chemin.size()&&y>=0) {
 
          			int coord[][] = chemin.get(y).getCoord();
          			line = new Line2D.Double(coord[0][0]+pointWidth/2, coord[0][1]+pointWidth/2, coord[1][0]+pointWidth/2, coord[1][1]+pointWidth/2);
 
          			shapes.add(line);
-          			y++;
+          			
                  }
+                 y++;
                  repaint();
          }
 
    	    });
-		timer.setInitialDelay(500);
+		timer.setInitialDelay(200);
 		timer.start();
     }
 
