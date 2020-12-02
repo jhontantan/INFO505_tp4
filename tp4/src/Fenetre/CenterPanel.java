@@ -13,7 +13,7 @@ import javax.swing.JPanel;
 import tp4.*;
 
 
-public class CenterPanel extends JPanel  implements Observer{
+public class CenterPanel extends JPanel {
 	private static final long serialVersionUID = 1L;
 
     public  static int CHEMIN_PADDING = 5;
@@ -64,10 +64,5 @@ public class CenterPanel extends JPanel  implements Observer{
    	     	 		coord[1][0]+pointWidth/2,
    	     	 		coord[1][1]+pointWidth/2);
    	        }
-    }
-
-    @Override
-    public void update(Observable o, Object arg) {
-      this.repaint();
     }
 }
